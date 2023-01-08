@@ -1,0 +1,2 @@
+Game/Content/MetaHumans/AI_Female/Face/AI_Female_FaceMesh.uasset filter=lfs diff=lfs merge=lfs -text
+Game/Content/MetaHumans/Common/Face/Face_Archetype.uasset filter=lfs diff=lfs merge=lfs -text
