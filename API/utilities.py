@@ -1,21 +1,22 @@
-import contextlib
+from huggingface_hub import login
+import soundfile
+import json
 import glob
 import os
-import wave
 
 
-def create_project_directory_path(project_name):
+def create_project_directory(project_name):
     home_directory = os.path.expanduser('~')
     project_directory = os.path.join(home_directory, project_name)
 
     if not os.path.isdir(project_directory):
         os.mkdir(project_directory)
 
-    return project_directory
+    return project_directory + '\\'
 
 
 def clear_project_directory(project_name):
-    project_directory = create_project_directory_path(project_name)
+    project_directory = create_project_directory(project_name)
     if project_directory == '':
         return
 
@@ -24,28 +25,36 @@ def clear_project_directory(project_name):
         os.remove(file)
 
 
-def audio_duration(src):
-    with contextlib.closing(wave.open(src, 'r')) as file:
-        frames = file.getnframes()
-        rate = file.getframerate()
-        duration = frames / float(rate)
-        return duration
+def resample_file(input_path, output_path):
+    data, samplerate = soundfile.read(input_path)
+    soundfile.write(output_path, data, samplerate, subtype='PCM_16')
+
+
+def load_config():
+    try:
+        with open('./environment/config.env', 'r') as file:
+            current_config = json.load(file)
+    except Exception as e:
+        print(f"Load config error: {e}")
+        return
+
+    # Hugging Face
+    if current_config['HUGGINGFACE_ACCESS_TOKEN'] != '':
+        login(current_config['HUGGINGFACE_ACCESS_TOKEN'])
+
+    # OpenAI
+    os.environ['OPENAI_API_KEY'] = current_config['OPENAI_API_KEY']
+
+    return current_config
+
+
+def save_config(current_config):
+    with open('./environment/config.env', 'w') as file:
+        json.dump(current_config, file, indent=4)
 
 
 def sanitize(string):
-    characters = ['\"', '\'', '\\', '\r']
+    characters = ['\"', '\'', '\\', '\r', '\n']
     for char in characters:
         string = string.replace(char, " ")
     return string
-
-
-def change_voice(tts_engine, language, gender):
-    for voice in tts_engine.getProperty('voices'):
-        if language in voice.name:
-            if gender == 0 and ("Zira" in voice.name or "Hazel" in voice.name):
-                tts_engine.setProperty('voice', voice.id)
-                return True
-            if gender == 1 and "David" in voice.name:
-                tts_engine.setProperty('voice', voice.id)
-                return True
-    return False
