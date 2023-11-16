@@ -25,10 +25,26 @@ class ImageGenerator:
         if "stable-diffusion-2" in model:
             return self.stable_diffusion_2(model, description)
 
-        if "open-ai" in model:
+        if "dall-e-3" == model or "dall-e-2" == model:
             return self.open_ai(description)
 
-        return jsonify({'status': 3, 'description': 'The model was not recognized', 'file_name': ''})
+        match model:
+            case "stable-diffusion-v1":
+                pass
+
+            case "Python":
+                print("You can become a Data Scientist")
+
+            case "PHP":
+                print("You can become a backend developer")
+
+            case "Solidity":
+                print("You can become a Blockchain developer")
+
+            case "Java":
+                print("You can become a mobile app developer")
+            case _:
+                return jsonify({'status': 2, 'description': 'The model was not recognized', 'file_name': ''})
 
     def stable_diffusion_1(self, model, description):
         try:
@@ -65,3 +81,21 @@ class ImageGenerator:
 
     def open_ai(self, description):
         pass
+
+
+# model_id = "stabilityai/stable-diffusion-2"
+#
+# # Use the Euler scheduler here instead
+# scheduler = EulerDiscreteScheduler.from_pretrained(model_id, subfolder="scheduler")
+# pipe = StableDiffusionPipeline.from_pretrained(
+#     model_id,
+#     scheduler=scheduler,
+#     torch_dtype=torch.float16,
+#     low_cpu_mem_usage=True,
+# )
+# # pipe = pipe.to("cuda")
+#
+# prompt = "a photo of an astronaut riding a horse on mars"
+# image = pipe(prompt).images[0]
+#
+# image.save("astronaut_rides_horse.png")
