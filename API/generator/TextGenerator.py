@@ -8,3 +8,4 @@ class TextGenerator:
     def generate(self, model):
         model = model.lower().replace(" ", "_")
 
+        # TODO Dummy endpoint

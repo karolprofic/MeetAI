@@ -1,124 +1,36 @@
 #####################################################################
 # MAIN
 #####################################################################
-# x = stt.generate("openai", "audio_16-11-2023_20-52-32.wav")
-# print(x)
+@app.route('/experiment/', methods=['POST'])
+def experiment():
+    try:
+        requests_toolbelt.MultipartDecoder
 
-# print(tts.generate("openai_tts", "alloy", "Unable to find model or voice name"))
+        request_json = json.loads(request.values.get('json'))
+        input_type = request_json["InputType"]
+        input_content = request_json["InputContent"]
 
-# ig = ImageGenerator("cuda", project_directory)
-# ig.generate("stabilityai/stable-diffusion-2", "dog")
-#
-#
-# TODO Setting API Key during setup and check
-# TODO: Text generator (voice gender input) + cpp generated in ue5
-#
-#
-#
-# @app.route('/upload', methods=['POST'])
-# def upload():
-#     if 'file' not in request.files:
-#         return jsonify({'status': 1, 'description': 'No file part in the request'})
-#
-#     file = request.files['file']
-#     if file.filename == '':
-#         return jsonify({'status': 2, 'description': 'No file selected for uploading'})
-#
-#     file.save(os.path.join(app.config['PROJECT_DIRECTORY'], file.filename))
-#     return jsonify({'status': 0, 'description': 'File successfully uploaded'})
-#
-#
-# @app.route('/download/<file_name>', methods=['GET'])
-# def download(file_name):
-#     file_path = os.path.join(app.config['PROJECT_DIRECTORY'], file_name)
-#     file_type = file_path[-3:]
-#
-#     if file_type != "png" and file_type != "wav":
-#         return Response(status=400)
-#
-#     if not os.path.exists(file_path):
-#         return Response(status=404)
-#
-#     with open(file_path, mode='rb') as file:
-#         file_content = file.read()
-#         file_bytes = BytesIO(file_content)
-#         file_wrapper = FileWrapper(file_bytes)
-#         if file_type == "png":
-#             return Response(file_wrapper, mimetype="image/png", direct_passthrough=True, status=200)
-#         if file_type == "wav":
-#             return Response(file_wrapper, mimetype="converter/wav", direct_passthrough=True, status=200)
-#
-#     return Response(status=404)
-#
-#
-# @app.route('/dummy_image_generation', methods=['GET', 'POST'])
-# def status():
-#     return jsonify({
-#         'status': 0,
-#         'description': 'Image generated successfully',
-#         'file_name': "example.png"
-#     })
-#
-#
-# @app.route('/dummy_text_generation', methods=['GET', 'POST'])
-# def status():
-#     return jsonify({
-#         'status': 0,
-#         'description': 'Text generated successfully',
-#         'text': "Sure, I'd recommend the movie 'Inception' directed by Christopher Nolan.",
-#         'converter': "speach.wav"
-#     })
-#
-#
-#
-# # image genraion
-# # text generaion
-# # request_data = request.get_json()
-# # request_text = request_data["text"]
-# # request_voice = int(request_data["voice"])
-# # request_rate = int(request_data["rate"])
-# #
-# # if request_text is None or request_voice is None or request_rate is None or request_text == "":
-# #     return jsonify({'status': 'Unable to generate speech', 'src': '-', 'len': 0.0})
-# #
-# # if request_voice != 0 and request_voice != 1:
-# #     return jsonify({'status': 'Unable to generate speech', 'src': '-', 'len': 0.0})
-#
-# # #
-# # @app.route('/experiment/', methods=['POST'])
-# # def experiment():
-# #     try:
-# #         requests_toolbelt.MultipartDecoder
-# #
-# #         request_json = json.loads(request.values.get('json'))
-# #         input_type = request_json["InputType"]
-# #         input_content = request_json["InputContent"]
-# #
-# #         if input_type == "Microphone":
-# #             # TODO: Audio to text
-# #             uploaded_file = request.files['file']
-# #             if uploaded_file.filename != '':
-# #                 uploaded_file.save(uploaded_file.filename)
-# #             else:
-# #                 return jsonify({'status': 'file error'})
-# #             # TODO: Implementation
-# #             return jsonify({'status': 'succ'})
-# #
-# #         if input_type == "Keyboard":
-# #             if input_content == "":
-# #                 return jsonify({'status': 'content empty'})
-# #             # TODO: Implementation
-# #             return jsonify({'status': 'succ'})
-# #
-# #         return jsonify({'status': 'unable to parse input_type'})
-# #
-# #     except:
-# #         return jsonify({'status': 'python script throw exception '})
-# #
-# #
-#
-#
-#
+        if input_type == "Microphone":
+            # TODO: Audio to text
+            uploaded_file = request.files['file']
+            if uploaded_file.filename != '':
+                uploaded_file.save(uploaded_file.filename)
+            else:
+                return jsonify({'status': 'file error'})
+            # TODO: Implementation
+            return jsonify({'status': 'succ'})
+
+        if input_type == "Keyboard":
+            if input_content == "":
+                return jsonify({'status': 'content empty'})
+            # TODO: Implementation
+            return jsonify({'status': 'succ'})
+
+        return jsonify({'status': 'unable to parse input_type'})
+
+    except:
+        return jsonify({'status': 'python script throw exception '})
+
 
 
 #################################################################
@@ -232,82 +144,4 @@ def conversation():
     except Exception as error:
         print(error)
         return jsonify({'status': 'Unable to generate answer', 'output': '-'})
-
-
-@app.route('/speech_to_text/', methods=['POST'])
-def speech_to_text():
-    try:
-        # Save uploaded file
-        path = project_directory + '\\' + datetime.now().strftime("audio_%d-%m-%Y_%H-%M-%S.wav")
-        with open(path, 'wb') as file:
-            file.write(request.get_data(cache=False, as_text=False, parse_form_data=False))
-
-        # Resample file
-        data, samplerate = soundfile.read(path)
-        soundfile.write(path, data, samplerate, subtype='PCM_16')
-
-        # Speech recognition
-        recognizer = speech_recognition.Recognizer()
-        with speech_recognition.AudioFile(path) as source:
-            audio_data = recognizer.record(source)
-            response = recognizer.recognize_google(audio_data)
-        return jsonify({'status': 'Speech recognized successfully', 'text': response})
-    except Exception as error:
-        print(error)
-        return jsonify({'status': 'Unable to recognize speech', 'text': '-'})
-
-
-# @app.route('/generate_speech/', methods=['POST'])
-# def generate_speech():
-#     request_data = request.get_json()
-#     request_text = request_data["text"]
-#     request_voice = int(request_data["voice"])
-#     request_rate = int(request_data["rate"])
-#
-#     if request_text is None or request_voice is None or request_rate is None or request_text == "":
-#         return jsonify({'status': 'Unable to generate speech', 'src': '-', 'len': 0.0})
-#
-#     if request_voice != 0 and request_voice != 1:
-#         return jsonify({'status': 'Unable to generate speech', 'src': '-', 'len': 0.0})
-#
-#     try:
-#         CoInitialize()
-#         engine = pyttsx3.init()
-#         if not change_voice(engine, "English", request_voice):
-#             return jsonify({'status': 'Unable to generate speech', 'src': '-', 'len': 0.0})
-#         engine.setProperty('rate', request_rate)
-#         path = project_directory + '\\' + datetime.now().strftime("audio_%d-%m-%Y_%H-%M-%S.wav")
-#         engine.save_to_file(request_text, path)
-#         engine.runAndWait()
-#         return jsonify({'status': 'Speech generated successfully', 'src': path, 'len': audio_duration(path)})
-#     except Exception as error:
-#         print(error)
-#         return jsonify({'status': 'Unable to generate speech', 'src': '-', 'len': 0.0})
-
-
-
-@app.route('/open_ai_conversation/', methods=['POST'])
-def open_ai_conversation():
-    return jsonify({
-        "status": "",
-        "len": 0.0,
-        "src": "",
-        "text": "",
-        "timestamps": [{}]
-    })
-
-@app.route('/fake_request/', methods=['GET'])
-def fake_request():
-    return jsonify({
-        "status": "OK",
-        "len": 68.22648526077097,
-        "src": "C:\\Users\\Karol\\MeetAI\\audio_31-07-2023_23-54-47.wav",
-        "text": "Sure, I'd recommend the movie 'Inception' directed by Christopher Nolan. It's a mind-bending, action-packed sci-fi thriller that will keep you on the edge of your seat from start to finish. The film follows Dom Cobb, played by Leonardo DiCaprio, a skilled thief who enters people's dreams to steal their secrets. However, this time, he's given a unique task - not to steal an idea, but to plant one in someone's mind. As he delves into the subconscious of his target, the line between reality and dreams blurs, leading to a series of stunning visual sequences and intense psychological drama. What makes 'Inception' so captivating is its thought-provoking exploration of human emotions and the power of the mind. The intricate plot weaves layers upon layers of complexity, leaving you questioning what is real and what is merely a construct of the subconscious. The outstanding ensemble cast, including Joseph Gordon-Levitt, Tom Hardy, and Ellen Page, delivers exceptional performances that add depth to the characters and heighten the overall cinematic experience.",
-        "timestamps": [{"conf": 1, "end": 0.6, "start": 0.09, "word": "sure"},
-                       {"conf": 1, "end": 1.11, "start": 0.93, "word": "i'd"},
-                       {"conf": 1, "end": 1.59, "start": 1.11, "word": "recommend"}]
-    })
-
-
-
 

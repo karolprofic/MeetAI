@@ -1,3 +1,4 @@
+import soundfile
 import speech_recognition
 
 
@@ -12,13 +13,16 @@ class SpeechToText:
         model = model.lower().replace(" ", "_")
         path = self.path + filename
 
+        if model in "dummy_stt":
+            return {'status': 'Speech recognized successfully', 'text': 'example'}
+
         if model in "google_cloud_stt":
             return self.google_cloud_stt(path)
 
         if model in "openai_whisper_cloud_stt":
             return self.openai_cloud_stt(path)
 
-        return {'status': 'Unable to find model', 'text': '-'}
+        return {'status': 'Unable to find model'}
 
     @staticmethod
     def google_cloud_stt(filepath):
@@ -27,11 +31,10 @@ class SpeechToText:
             with speech_recognition.AudioFile(filepath) as source:
                 audio_data = recognizer.record(source)
                 response = recognizer.recognize_google(audio_data)
-                print(response)
             return {'status': 'Speech recognized successfully', 'text': response}
-        except Exception as error:
-            print(error)
-            return {'status': 'Unable to recognize speech', 'text': '-'}
+        except Exception as e:
+            print(f"Google API returned an error: {e}")
+            return {'status': 'Unable to recognize speech'}
 
     def openai_cloud_stt(self, filepath):
         try:
@@ -43,6 +46,6 @@ class SpeechToText:
             )
         except Exception as e:
             print(f"OpenAI API returned an error: {e}")
-            return {'status': 'Unable to recognize speech', 'text': '-'}
+            return {'status': 'Unable to recognize speech'}
 
         return {'status': 'Speech recognized successfully', 'text': transcript}

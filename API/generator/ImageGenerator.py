@@ -7,7 +7,7 @@ import torch
 # TODO Tested Image: "CompVis/stable-diffusion-v1-4" / "stabilityai/stable-diffusion-2"
 # TODO Stable Diffusion 2 dont work
 # TODO Endpoint should return binary image or error
-
+# TODO Generator method refactor and evaluate model choice
 
 class ImageGenerator:
     def __init__(self, device, save_path):
@@ -18,6 +18,9 @@ class ImageGenerator:
 
         if model == "" or description == "":
             return {'status': 'Unable to generate image', 'file_name': ''}
+
+        if "dummy" in model:
+            return {'status': 'Image generated successfully', 'file_name': 'example.png'}
 
         if "stable-diffusion-v1" in model:
             return self.stable_diffusion_1(model, description)

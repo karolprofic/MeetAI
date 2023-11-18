@@ -2,7 +2,7 @@ import glob
 import os
 
 
-def project_directory_path(project_name):
+def create_project_directory(project_name):
     home_directory = os.path.expanduser('~')
     project_directory = os.path.join(home_directory, project_name)
 
@@ -13,7 +13,7 @@ def project_directory_path(project_name):
 
 
 def clear_project_directory(project_name):
-    project_directory = project_directory_path(project_name)
+    project_directory = create_project_directory(project_name)
     if project_directory == '':
         return
 

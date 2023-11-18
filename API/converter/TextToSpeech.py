@@ -22,13 +22,16 @@ class TextToSpeech:
     def generate(self, model, voice, text):
         model = model.lower().replace(" ", "_")
 
+        if model in "dummy_tts":
+            return {'status': 'Speech generated successfully', 'filename': 'example.wav', 'len': 0.2}
+
         if model in "windows_tts" and voice in self.pyttsx_voices:
             return self.pyttsx_tts(text, voice)
 
         if model in "openai_tts" and voice in self.openai_voices:
             return self.openai_tts(text, voice)
 
-        return {'status': 'Unable to find model or voice name', 'filename': '-', 'len': 0.0}
+        return {'status': 'Unable to find model or voice name'}
 
     def openai_tts(self, text, voice):
         try:
@@ -39,7 +42,7 @@ class TextToSpeech:
             )
         except Exception as e:
             print(f"OpenAI API returned an error: {e}")
-            return {'status': 'Unable to generate speech', 'filename': '-', 'len': 0.0}
+            return {'status': 'Unable to generate speech'}
 
         path_wav = self.create_path()
         path_flac = path_wav.replace(".wav", ".flac")
@@ -72,7 +75,7 @@ class TextToSpeech:
             return {'status': 'Speech generated successfully', 'filename': filename, 'len': self.file_duration(path)}
         except Exception as error:
             print(error)
-            return {'status': 'Unable to generate speech', 'filename': '-', 'len': 0.0}
+            return {'status': 'Unable to generate speech'}
 
     def create_path(self):
         return self.path + datetime.now().strftime("audio_%d-%m-%Y_%H-%M-%S.wav")
