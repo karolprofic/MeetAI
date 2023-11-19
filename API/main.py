@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify, send_file, abort
 from openai import OpenAI
 from utilities import *
 import pyttsx3
+import base64
 
 # Libraries
 pyttsx = pyttsx3.init()
@@ -27,16 +28,13 @@ tg = TextGenerator(PROJECT_DIRECTORY, openAI)
 ig = ImageGenerator(PROJECT_DIRECTORY, openAI)
 
 
-# TODO Double helpers declaration do it in one place or with different names
 # TODO Refactor ImageGenerator (generate - better model name handling)
-# TODO Finish Main Refactor
 # TODO Implement TextGenerator
-# TODO Run script refactor and conda/venv environment
+# TODO Run script refactor and conda/venv environment (ask for api key)
 # TODO Postmen new config and test all output <- new documentation and better way to do that
 # TODO Facebook Lama and dedicated server - read about it
-# TODO Setting API Key during setup and check
 # TODO Think about UE5 C++ Implementation
-
+# TODO Redesign response to use multipart instate of base64
 
 # ==========================
 #       General API
@@ -150,12 +148,18 @@ def generate_text(text_model, tts_model='Windows', tts_voice='Zira', stt_model='
     if tts_result['status'] != 'Speech generated successfully':
         return jsonify(tts_result)
 
-    # TODO process result into base64 or multiencoder
+    filepath = PROJECT_DIRECTORY + tts_result['filename']
+    with open(filepath, "rb") as file:
+        file_binary = file.read()
+
+    file_base64 = base64.b64encode(file_binary)
+    file_base64_utf8 = file_base64.decode('utf-8')
+
     return jsonify({
         'status': 'Speech generated successfully',
-        'file': '',
         'text': tg_result['text'],
-        'len': tts_result['len']
+        'len': tts_result['len'],
+        'file': file_base64_utf8
     })
 
 
