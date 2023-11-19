@@ -21,6 +21,3 @@ def clear_project_directory(project_name):
     for file in files:
         os.remove(file)
 
-
-
-

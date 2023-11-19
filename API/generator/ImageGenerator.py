@@ -1,6 +1,6 @@
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 from datetime import datetime
-from helpers import *
+from utilities import *
 import torch
 
 

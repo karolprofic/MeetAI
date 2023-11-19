@@ -1,12 +1,11 @@
 from datetime import datetime
-
 from converter.TextToSpeech import TextToSpeech
 from converter.SpeechToText import SpeechToText
 from generator.TextGenerator import TextGenerator
 from generator.ImageGenerator import ImageGenerator
 from flask import Flask, request, jsonify, send_file, abort
 from openai import OpenAI
-from helpers import *
+from utilities import *
 import pyttsx3
 
 # Libraries
@@ -38,9 +37,10 @@ ig = ImageGenerator(PROJECT_DIRECTORY, openAI)
 # TODO Setting API Key during setup and check
 # TODO Think about UE5 C++ Implementation
 
-###############################
-#        General API          #
-###############################
+
+# ==========================
+#       General API
+# ==========================
 @app.route('/set_api_key/', methods=['POST'])
 def set_api_key():
     request_data = request.get_json()
@@ -131,18 +131,32 @@ def status():
     return jsonify({'status': 'Server is working'})
 
 
-###############################
-#        MeetAI API           #
-###############################
+# ==========================
+#        MeetAI API
+# ==========================
 @app.route('/generate_text/<text_model>/', methods=['POST'])
 @app.route('/generate_text/<text_model>/<tts_model>/<tts_voice>/', methods=['POST'])
 @app.route('/generate_text/<text_model>/<tts_model>/<tts_voice>/<stt_model>/', methods=['POST'])
 def generate_text(text_model, tts_model='Windows', tts_voice='Zira', stt_model='Google'):
-    print(text_model)
-    print(tts_model)
-    print(tts_voice)
-    print(stt_model)
-    return jsonify({})
+    query = process_input(stt_model)
+    if query is None or len(query) == 0:
+        return jsonify({'status': 'Failed to process input data'})
+
+    tg_result = tg.generate(text_model, query)
+    if tg_result['status'] != 'Text generated successfully':
+        return jsonify(tg_result)
+
+    tts_result = tts.generate(tts_model, tts_voice, tg_result['text'])
+    if tts_result['status'] != 'Speech generated successfully':
+        return jsonify(tts_result)
+
+    # TODO process result into base64 or multiencoder
+    return jsonify({
+        'status': 'Speech generated successfully',
+        'file': '',
+        'text': tg_result['text'],
+        'len': tts_result['len']
+    })
 
 
 @app.route('/generate_image/<image_model>/', methods=['POST'])
@@ -150,7 +164,7 @@ def generate_text(text_model, tts_model='Windows', tts_voice='Zira', stt_model='
 def generate_image(image_model, stt_model='Google'):
     description = process_input(stt_model)
     if description is None or len(description) == 0:
-        return jsonify({'status': 'Failed to process audio'})
+        return jsonify({'status': 'Failed to process input data'})
 
     result = ig.generate(image_model, description)
     if result['status'] != 'Image generated successfully':
@@ -160,9 +174,9 @@ def generate_image(image_model, stt_model='Google'):
     return send_file(filepath, mimetype="image/png", as_attachment=True)
 
 
-###############################
-#         Helpers            #
-###############################
+# ==========================
+#       Helpers
+# ==========================
 def save_file():
     if 'file' not in request.files:
         return {'status': 'No file in request'}
@@ -186,11 +200,14 @@ def save_file():
 def process_input(stt_model):
     if request.files.get('file'):
         result = save_file()
-
         if result['status'] != 'File uploaded successfully':
             return None
 
-        return stt.generate(stt_model, result['filename'])
+        transcription = stt.generate(stt_model, result['filename'])
+        if transcription['status'] != 'Speech recognized successfully':
+            return None
+
+        return transcription['text']
 
     return request.form.get('text')
 
