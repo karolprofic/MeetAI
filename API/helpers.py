@@ -22,8 +22,5 @@ def clear_project_directory(project_name):
         os.remove(file)
 
 
-def sanitize(string):
-    characters = ['\"', '\'', '\\', '\r']
-    for char in characters:
-        string = string.replace(char, " ")
-    return string
+
+

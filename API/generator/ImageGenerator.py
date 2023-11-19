@@ -1,6 +1,6 @@
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 from datetime import datetime
-from utilities import *
+from helpers import *
 import torch
 
 
@@ -17,10 +17,10 @@ class ImageGenerator:
     def generate(self, model, description):
 
         if model == "" or description == "":
-            return {'status': 'Unable to generate image', 'file_name': ''}
+            return {'status': 'Unable to generate image'}
 
         if "dummy" in model:
-            return {'status': 'Image generated successfully', 'file_name': 'example.png'}
+            return {'status': 'Image generated successfully', 'filename': 'example.png'}
 
         if "stable-diffusion-v1" in model:
             return self.stable_diffusion_1(model, description)
@@ -33,8 +33,8 @@ class ImageGenerator:
 
     def stable_diffusion_1(self, model, description):
         try:
-            file_name = datetime.now().strftime("image_%d-%m-%Y_%H-%M-%S.png")
-            file_path = os.path.join(self.save_path, file_name)
+            filename = datetime.now().strftime("image_%d-%m-%Y_%H-%M-%S.png")
+            file_path = os.path.join(self.save_path, filename)
             pipe = StableDiffusionPipeline.from_pretrained(
                 model,
                 torch_dtype=torch.float16,
@@ -43,14 +43,14 @@ class ImageGenerator:
             pipe = pipe.to(self.device)
             image = pipe(description).images[0]
             image.save(file_path)
-            return {'status': 'Image generated successfully', 'file_name': file_name}
+            return {'status': 'Image generated successfully', 'filename': filename}
         except Exception as e:
-            return {'status': f'An error occurred: {e}', 'file_name': ''}
+            return {'status': f'An error occurred: {e}'}
 
     def stable_diffusion_2(self, model, description):
         try:
-            file_name = datetime.now().strftime("image_%d-%m-%Y_%H-%M-%S.png")
-            file_path = os.path.join(self.save_path, file_name)
+            filename = datetime.now().strftime("image_%d-%m-%Y_%H-%M-%S.png")
+            file_path = os.path.join(self.save_path, filename)
             scheduler = EulerDiscreteScheduler.from_pretrained(model, subfolder="scheduler")
             pipe = StableDiffusionPipeline.from_pretrained(
                 model,
@@ -60,9 +60,9 @@ class ImageGenerator:
             pipe = pipe.to(self.device)
             image = pipe(description).images[0]
             image.save(file_path)
-            return {'status': 'Image generated successfully', 'file_name': file_name}
+            return {'status': 'Image generated successfully', 'filename': filename}
         except Exception as e:
-            return {'status': f'An error occurred: {e}', 'file_name': ''}
+            return {'status': f'An error occurred: {e}'}
 
     def open_ai(self, description):
         pass
