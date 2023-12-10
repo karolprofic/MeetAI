@@ -1,25 +1,27 @@
-import soundfile
+from utilities import resample_file
 import speech_recognition
 
-
-# TODO Resample file
 
 class SpeechToText:
     def __init__(self, path, openAI):
         self.path = path
         self.openAI = openAI
+        # Supported models
+        self.google_models = ["google", "google_stt", "google_cloud_stt"]
+        self.openai_models = ["openai", "openai_whisper", "openai_cloud_whisper", "openai_cloud_stt"]
 
     def generate(self, model, filename):
         model = model.lower().replace(" ", "_")
         path = self.path + filename
+        resample_file(path, path)
 
-        if model in "dummy_stt":
+        if model == "dummy":
             return {'status': 'Speech recognized successfully', 'text': 'example'}
 
-        if model in "google_cloud_stt":
+        if model in self.google_models:
             return self.google_cloud_stt(path)
 
-        if model in "openai_whisper_cloud_stt":
+        if model in self.openai_models:
             return self.openai_cloud_stt(path)
 
         return {'status': 'Unable to find model'}

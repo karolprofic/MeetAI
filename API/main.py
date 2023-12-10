@@ -28,6 +28,8 @@ tg = TextGenerator(PROJECT_DIRECTORY, openAI)
 ig = ImageGenerator(PROJECT_DIRECTORY, openAI)
 
 
+# TODO Better way for model input (key:value) - refactor all models arrays
+# TODO Standardize generate function
 # TODO Refactor ImageGenerator (generate - better model name handling)
 # TODO Implement TextGenerator
 # TODO Run script refactor and conda/venv environment (ask for api key)
@@ -35,6 +37,7 @@ ig = ImageGenerator(PROJECT_DIRECTORY, openAI)
 # TODO Facebook Lama and dedicated server - read about it
 # TODO Think about UE5 C++ Implementation
 # TODO Redesign response to use multipart instate of base64
+# TODO Make documentation and Postman/Conda config
 
 # ==========================
 #       General API
@@ -74,7 +77,7 @@ def text_to_speach():
     request_voice = request_data["voice"]
     request_text = request_data["text"]
 
-    if any(arg is None for arg in [request_model, request_voice, request_text]):
+    if any(arg is None or arg == "" for arg in [request_model, request_voice, request_text]):
         return jsonify({'status': 'Incorrect or missing data'})
 
     return jsonify(tts.generate(request_model, request_voice, request_text))
@@ -86,7 +89,7 @@ def image_generation():
     request_model = request_data["model"]
     request_description = request_data["description"]
 
-    if any(arg is None for arg in [request_model, request_description]):
+    if any(arg is None or arg == "" for arg in [request_model, request_description]):
         return jsonify({'status': 'Incorrect or missing data'})
 
     return jsonify(ig.generate(request_model, request_description))
@@ -98,7 +101,7 @@ def text_generation():
     request_model = request_data["model"]
     request_query = request_data["query"]
 
-    if any(arg is None for arg in [request_model, request_query]):
+    if any(arg is None or arg == "" for arg in [request_model, request_query]):
         return jsonify({'status': 'Incorrect or missing data'})
 
     return jsonify(tg.generate(request_model, request_query))

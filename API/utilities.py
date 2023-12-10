@@ -1,3 +1,4 @@
+import soundfile
 import glob
 import os
 
@@ -21,3 +22,7 @@ def clear_project_directory(project_name):
     for file in files:
         os.remove(file)
 
+
+def resample_file(input_path, output_path):
+    data, samplerate = soundfile.read(input_path)
+    soundfile.write(output_path, data, samplerate, subtype='PCM_16')

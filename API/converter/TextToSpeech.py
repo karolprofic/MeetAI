@@ -2,7 +2,7 @@ import contextlib
 import wave
 from comtypes import CoInitialize
 from datetime import datetime
-import soundfile
+from utilities import resample_file
 
 
 class TextToSpeech:
@@ -12,6 +12,9 @@ class TextToSpeech:
         self.openAI = openAI
         self.pyttsx_voices = self.pyttsx_find_voices()
         self.openai_voices = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+        # Supported models
+        self.windows_models = ["windows", "pyttsx", "localhost", "local"]
+        self.openai_models = ["openai", "openai_tts", "openai_cloud_tts"]
 
     def get_voices(self):
         return {
@@ -22,13 +25,13 @@ class TextToSpeech:
     def generate(self, model, voice, text):
         model = model.lower().replace(" ", "_")
 
-        if model in "dummy_tts":
+        if model == "dummy":
             return {'status': 'Speech generated successfully', 'filename': 'example.wav', 'len': 0.2}
 
-        if model in "windows_tts" and voice in self.pyttsx_voices:
+        if model in self.windows_models and voice in self.pyttsx_voices:
             return self.pyttsx_tts(text, voice)
 
-        if model in "openai_tts" and voice in self.openai_voices:
+        if model in self.openai_models and voice in self.openai_voices:
             return self.openai_tts(text, voice)
 
         return {'status': 'Unable to find model or voice name'}
@@ -48,7 +51,7 @@ class TextToSpeech:
         path_flac = path_wav.replace(".wav", ".flac")
         filename = path_wav.replace(self.path, "")
         response.stream_to_file(path_flac)
-        self.convert_flac_to_wav(path_flac, path_wav)
+        resample_file(path_flac, path_wav)
         return {'status': 'Speech generated successfully', 'filename': filename, 'len': self.file_duration(path_wav)}
 
     def pyttsx_find_voices(self):
@@ -87,8 +90,3 @@ class TextToSpeech:
             rate = file.getframerate()
             duration = frames / float(rate)
             return duration
-
-    @staticmethod
-    def convert_flac_to_wav(flac_file, wav_file):
-        audio, sr = soundfile.read(flac_file)
-        soundfile.write(wav_file, audio, sr, 'PCM_16')
