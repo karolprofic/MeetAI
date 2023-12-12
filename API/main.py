@@ -51,13 +51,12 @@ def set_api_key():
     if request_api is None or request_key is None:
         return jsonify({'status': 'Incorrect request parameters'})
 
-    match request_api:
-        case "OpenAI":
-            os.environ['OPENAI_API_KEY'] = str(request_key)
-            openAI.api_key = os.environ['OPENAI_API_KEY']
-            return jsonify({'status': 'OpenAI API key added successfully'})
-        case _:
-            return jsonify({'status': 'Requested API is not supported'})
+    if request_api == "OpenAI":
+        os.environ['OPENAI_API_KEY'] = str(request_key)
+        openAI.api_key = os.environ['OPENAI_API_KEY']
+        return jsonify({'status': 'OpenAI API key added successfully'})
+
+    return jsonify({'status': 'Requested API is not supported'})
 
 
 @app.route('/speech_to_text/<model>/', methods=['POST'])

@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
+
 # TODO Text generation Microsoft
 # TODO Text generation Facebook
 # TODO Text generation OpenAI
