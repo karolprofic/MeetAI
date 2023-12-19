@@ -1,121 +1,186 @@
 # API Documentation
-Adress: `127.0.0.1`  
+Address: `127.0.0.1`  
 Port: `5000`
 
-----
+---
 
-### Aplication status:
-**URL:** `/status/`  
+### Download File
+**URL:** `/download_file/<filename>`  
 **Method:** `GET`  
-**Body:** `{}`  
-**Response:**  
-```javascript
-{
-  "status" : string  // Response status: 'Server is working' or lack of response
-}
-```
-
-----
-
-### Get file:
-**URL:** `/get_file/<file_name>`  
-**Method:** `GET`  
-**Body:** `{}`  
+**Body:** Empty, filename as URL parameter  
 **Response:**  Binary file with mimetype equal "image/png" or "audio/wav"
 
 ---
 
-### Speech to text:
-**URL:** `/speech_to_text/`  
+### Upload File
+**URL:** `/upload_file/`  
 **Method:** `POST`  
-**Body:** Binary audio file
-**Response:**  
+**Body:** Form data with file inside  
+**Response:**
 ```javascript
 {
-    "status" : string,  // Response status: 'Speech recognized successfully' or 'Unable to recognize speech'
-    "text" : string     // Audio file content in text form 
+  "status": string,   // Response status: 'No file in request', 
+                      //                  'No selected file or file empty', 
+                      //                  'File extension not allowed',
+                      //                  'File uploaded successfully',
+  "filename": string  // Optional parameter containing the name given to the file 
 }
 ```
+----
 
----
-
-### Generate speech:
-**URL:** `/generate_speech/`  
+### Set API Key
+**URL:** `/set_api_key/`  
 **Method:** `POST`  
 **Body:**   
 ```javascript
 {
-    "text": string,       // Text to be said
-    "voice": int,         // Voice gender: 0 for female voice, 1 for male
-    "rate": int           // Speaking speed, default 150
+    "api": string,       // API Name
+    "key": string        // API Key
 }
 ```
 **Response:**  
 ```javascript
 {
-    "status" : string,  // Response status: 'Speech generated successfully' or 'Unable to generate speech'
-    "src" : string      // Source path to generated file
-    "len" : float       // Audio file length in seconds
+    "status": string    // Response status: 'Incorrect request parameters' 
+                        //                  'OpenAI API key added successfully'
+                        //                  'Requested API is not supported'
 }
 ```
 
 ---
 
-### Generate image:
-**URL:** `/generate_image/`  
+### Server status
+**URL:** `/status/`  
+**Method:** `GET`  
+**Body:** Empty  
+**Response:**  
+```javascript
+{
+  "status": string  // Response status: 'Server is working' or lack of response
+}
+```
+
+----
+
+### Speech To Text (STT)
+**URL:** `/speech_to_text/<sst_model>/`  
+**Method:** `POST`  
+**Body:** Form data with file inside and SST model name as URL parameter  
+**Response:**  
+```javascript
+{
+    "status": string,   // Response status: 'No file in request'
+                        //                  'No selected file or file empty'
+                        //                  'File extension not allowed'
+                        //                  'Unable to find model'
+                        //                  'Unable to recognize speech'
+                        //                  'Speech recognized successfully'
+    "text": string      // Optional parameter with recognized text
+}
+```
+
+---
+
+### Text To Speach (TTS)
+**URL:** `/text_to_speach/`  
+**Method:** `POST`  
+**Body:**   
+```javascript
+{
+    "model": string,     // TTS model name
+    "voice": string,     // TTS voice name
+    "text": string       // Text to be said
+}
+```
+**Response:**  
+```javascript
+{
+    "status": string,         // Response status: 'Incorrect or missing data'
+                              //                  'Unable to find model or voice name'
+                              //                  'Unable to generate speech'
+                              //                  'Speech generated successfully'
+    "filename": string        // Optional parameter with the name of the generated file
+    "len": float              // Optional parameter with the length of the generated file in seconds
+}
+```
+
+---
+
+### Image Generation (IG)
+**URL:** `/image_generation/`  
 **Method:** `POST`  
 **Body:**  
 ```javascript
 {
-    "description": string,     // Description of image
-    "model": string,           // Name of AI model to be used
+    "model": string,           // Image generation model name
+    "description": string      // Image description
 }
 ```
 **Response:**  
 ```javascript
 {
-    "status" : string,  // Response status: 'Image generated successfully' or 'Unable to generate image'
-    "src" : string      // Source path to generated image
+    "status": string,        // Response status: 'Incorrect or missing data' 
+                             //                  'An error occurred: Error message'
+                             //                  'Image generated successfully'
+    "filename": string       // Optional parameter with the name of the generated file
 }
 ```
 
 ---
 
-### Generate story:
-**URL:** `/generate_story/`  
+### Text Generation (TG)
+**URL:** `/text_generation/`  
 **Method:** `POST`  
 **Body:**   
 ```javascript
 {
-    "seed": string,         // First few word of story
-    "length": int,          // Response length 
-    "model": string,        // Name of AI model to be used
+    "model": string,       // Text generation model name 
+    "query": string        // Input query 
 }
 ```
 **Response:**  
 ```javascript
 {
-    "status" : string,    // Response status: 'Story generated successfully' or 'Unable to generate story'
-    "story" : string      // Generated story
+    "status": string,     // Response status: 'Incorrect or missing data' 
+                          //                  'An error occurred: Error message'
+                          //                  'Text generated successfully'
+    "text": string        // Generated text
+}
+```
+---
+
+### MeetAI - Text Generation
+**URL:** `/generate_text/<text_model>/<tts_model>/<tts_voice>/<stt_model>/`  
+**Method:** `POST`  
+**Body:** Form data with a file or text inside and the rest of the parameters in the URL. Parameters can be skipped, default values are Windows for <tts_model>, Zira for <tts_voice> and Google for <stt_model>      
+**Response:**  
+```javascript
+{
+    "status": string,     // Response status: '' 
+                          //                  ''
+                          //                  ''
+                          //                  'Speech generated successfully'
+    "text": string        // Response as text
+    "len": float          // File length
+    "name": string        // File name
+    "file": string        // File encoded with Base64
 }
 ```
 
 ---
 
-### Conversation:
-**URL:** `/conversation/`  
+### MeetAI - Text Generation
+**URL:** `/generate_image/<image_model>/<stt_model>/`  
 **Method:** `POST`  
 **Body:**   
 ```javascript
 {
-    "input": string,        // Your interaction, for example a question
-    "model": string,        // Name of AI model to be used
+
 }
 ```
 **Response:**  
 ```javascript
 {
-    "status" : string,     // Response status: 'Answer generated successfully' or 'Unable to generate answer'
-    "output" : string      // AI response to your interaction
+
 }
 ```

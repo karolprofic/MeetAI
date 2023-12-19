@@ -1,14 +1,14 @@
 # MeetAI
 A virtual environment where you can interact with various artificial intelligence models. You can: have a conversation, generate a story based on a few words, turn text into an image.
 
-## Resources:
+## Resources
 
 - [API Documentation](/Documentation/API.md)
 - [Future development](https://trello.com/b/VQPKXrbN/meetai)
 - [Engine settings](/Documentation/Settings.md)
 - [Attributions](/Documentation/Attributions.md)
 
-## How to install:
+## How to install
 
 1. [Download and install Miniconda3](https://docs.conda.io/en/latest/miniconda.html)
 2. [Downlaod and install MeetAI](https://drive.google.com/drive/folders/1TAlGZ3nl1YpKFiOE9DgaB1Rktro0MH0l)
@@ -18,6 +18,6 @@ A virtual environment where you can interact with various artificial intelligenc
 6. Click Play and have fun
 
 
-## Screenshots:
+## Screenshots
 
 ![Screenshots](/Screenshots/ScreenshotsCompilation.jpg)

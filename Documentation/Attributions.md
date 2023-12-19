@@ -1,5 +1,5 @@
 # Attributions
-### 3D Models:
+### 3D Models
 - ["Constructivism style house" by Максим Любецкий under 3dsky license](https://3dsky.org/3dmodels/show/dom_v_stilie_konstruktivizm_1)
 - ["Burgbad Senza" by kirillibertine under 3dsky license](https://3dsky.org/3dmodels/show/burgbad_senza)
 - ["Techno kitchen PREMIOHOME" by PREMIOHOME under 3dsky license](https://3dsky.org/3dmodels/show/techno_kitchen_premiohome)
@@ -14,10 +14,10 @@
 - ["Parking limiter (bollards) in the form of a cube" by sv.stats is licensed under Attribution 4.0 International (CC BY 4.0)](https://sketchfab.com/3d-models/parking-limiter-bollards-in-the-form-of-a-cube-c038c71e11694be3904d0d6328e39d21)
 
 
-### Textures:
+### Textures
 - [GUI Buttons by Devmode](https://www.youtube.com/watch?v=foVefYHUMC4&list=PL0BMNVi4hYZDBGkclzmd_i0fQSchNgyNr&ab_channel=Devmode)
 
-### Music:
+### Music
 - ["For Mimi" by Twin Musicom under Attribution 4.0 International (CC BY 4.0)](twinmusicom.org)
 - ["Tom Perry" by Twin Musicom under Attribution 4.0 International (CC BY 4.0)](twinmusicom.org)
 - ["Old Bossa" by Twin Musicom under Attribution 4.0 International (CC BY 4.0)](twinmusicom.org)
@@ -25,19 +25,19 @@
 - ["Elvish Presto" by Twin Musicom under Attribution 4.0 International (CC BY 4.0)](twinmusicom.org)
 - ["Italian Afternoon" by Twin Musicom under Attribution 4.0 International (CC BY 4.0)](twinmusicom.org)
 
-### Audio:
+### Audio
 - ["Door Close 1" by rdneubauer is licensed under pixabay license](https://pixabay.com/sound-effects/door-close-1-91849/)
 - ["Switch Light 04" by tbrook is licensed under pixabay license](https://pixabay.com/pl/sound-effects/switch-light-04-82204/)
 
-### Plugins:
+### Plugins
 - ["Open Land for Unreal Engine" by GDi4K is licensed under Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://github.com/GDi4K/unreal-openland)
 - ["VaRest" by ufna is licensed under MIT License](https://github.com/ufna/VaRest)
 
-### Unreal Engine Marketplace Content:
+### Unreal Engine Marketplace Content
 - Twinmotion Content for Unreal Engine
 - tropical Vegetation: Pandanus Plants
 
-### AI Models:
+### AI Models
 - GPT-Neo by EleutherAI
 - DialoGPT by Microsoft
 - Stable Diffusion v1.4 by CompVis
