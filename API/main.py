@@ -9,17 +9,14 @@ from utilities import *
 import pyttsx3
 import base64
 
-# Libraries
-pyttsx = pyttsx3.init()
-openAI = OpenAI()
-openAI.api_key = os.getenv('OPENAI_API_KEY', '')
-
 # Config
 PROJECT_DIRECTORY = create_project_directory("MeetAI")
 ALLOWED_EXTENSIONS = ['png', 'wav']
 
-# Flask config
-app = Flask(__name__)
+# Libraries
+set_environment_variables()
+pyttsx = pyttsx3.init()
+openAI = OpenAI()
 
 # API Classes
 stt = SpeechToText(PROJECT_DIRECTORY, openAI)
@@ -27,17 +24,13 @@ tts = TextToSpeech(PROJECT_DIRECTORY, pyttsx, openAI)
 tg = TextGenerator(PROJECT_DIRECTORY, openAI)
 ig = ImageGenerator(PROJECT_DIRECTORY, openAI)
 
+# Flask config
+app = Flask(__name__)
 
-# TODO Better way for model input (key:value) - refactor all models arrays
-# TODO Standardize generate function
-# TODO Refactor ImageGenerator (generate - better model name handling)
-# TODO Implement TextGenerator
 # TODO Run script refactor and conda/venv environment (ask for api key)
-# TODO Postmen new config and test all output <- new documentation and better way to do that
-# TODO Facebook Lama and dedicated server - read about it
-# TODO Think about UE5 C++ Implementation
-# TODO Redesign response to use multipart instate of base64
+# TODO Postmen new config and test all output
 # TODO Make documentation and Postman/Conda config
+# TODO New documentation with clearer way to show endpoints
 
 # ==========================
 #       General API
@@ -161,6 +154,7 @@ def generate_text(text_model, tts_model='Windows', tts_voice='Zira', stt_model='
         'status': 'Speech generated successfully',
         'text': tg_result['text'],
         'len': tts_result['len'],
+        'name': tts_result['filename'],
         'file': file_base64_utf8
     })
 

@@ -1,9 +1,9 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
-
+# TODO Finish implementation of TextGenerator
 # TODO Text generation Microsoft
-# TODO Text generation Facebook
+# TODO Text generation Facebook (LLAMA)
 # TODO Text generation OpenAI
 # TODO Code refactor and check input
 

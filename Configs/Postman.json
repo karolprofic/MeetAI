@@ -1,12 +1,99 @@
 {
 	"info": {
-		"_postman_id": "9ac4a3aa-9e65-4343-82d6-81b11eec3c41",
+		"_postman_id": "e2b467bb-7c48-4092-a466-8aef438f99d8",
 		"name": "MeetAI",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31248555"
 	},
 	"item": [
 		{
-			"name": "Status",
+			"name": "Download File",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/download_file/<filename>/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"download_file",
+						"<filename>",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/upload_file/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"upload_file",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set API Key",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"api\": \"API Name\",\r\n    \"key\": \"API Key\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/set_api_key/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"set_api_key",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Server status",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -28,145 +115,22 @@
 			"response": []
 		},
 		{
-			"name": "Speech",
+			"name": "Speech To Text (STT)",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"text\": \"Hello from Postman!\",\r\n    \"rate\": 150,\r\n    \"voice\": 0\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
 						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:5000/generate_speech/",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"generate_speech",
-						""
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Image",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"description\": \"\",\r\n    \"model\": \"\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
 				},
 				"url": {
-					"raw": "127.0.0.1:5000/generate_image/",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"generate_image",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Story",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"seed\": \"\",\r\n    \"model\": \"\",\r\n    \"length\": 150\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:5000/generate_story/",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"generate_story",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Conversation",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"input\": \"\",\r\n    \"model\": \"\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:5000/conversation/",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"conversation",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Speech to text",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "file",
-					"file": {},
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:5000/speech_to_text/",
+					"raw": "127.0.0.1:5000/speech_to_text/sst_model/",
 					"host": [
 						"127",
 						"0",
@@ -176,6 +140,7 @@
 					"port": "5000",
 					"path": [
 						"speech_to_text",
+						"sst_model",
 						""
 					]
 				}
@@ -183,12 +148,21 @@
 			"response": []
 		},
 		{
-			"name": "Get file",
+			"name": "Text To Speach (TTS)",
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\": \"TTS Model name\",\r\n    \"voice\": \"TTS Voice name\",\r\n    \"text\": \"TTS Text\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "127.0.0.1:5000/get_file/file_name.png",
+					"raw": "127.0.0.1:5000/text_to_speach/",
 					"host": [
 						"127",
 						"0",
@@ -197,8 +171,150 @@
 					],
 					"port": "5000",
 					"path": [
-						"get_file",
-						"file_name.png"
+						"text_to_speach",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Image Generation (IG)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\": \"Image generation model name\",\r\n    \"description\": \"Image description\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/image_generation/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"image_generation",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text Generation (TG)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\": \"Text generation model name\",\r\n    \"query\": \"Text query\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/text_generation/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"text_generation",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MeetAI - Text Generation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "text",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/generate_text/<text_model>/<tts_model>/<tts_voice>/<stt_model>/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generate_text",
+						"<text_model>",
+						"<tts_model>",
+						"<tts_voice>",
+						"<stt_model>",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MeetAI - Image Generation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "text",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/generate_image/<image_model>/<stt_model>/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generate_image",
+						"<image_model>",
+						"<stt_model>",
+						""
 					]
 				}
 			},

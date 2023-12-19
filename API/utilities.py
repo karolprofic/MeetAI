@@ -26,3 +26,8 @@ def clear_project_directory(project_name):
 def resample_file(input_path, output_path):
     data, samplerate = soundfile.read(input_path)
     soundfile.write(output_path, data, samplerate, subtype='PCM_16')
+
+
+def set_environment_variables():
+    if os.environ.get('OPENAI_API_KEY') is None:
+        os.environ.setdefault('OPENAI_API_KEY', '')
