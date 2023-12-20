@@ -37,6 +37,7 @@ Port: `5000`
     "api": string,       // API Name
     "key": string        // API Key
 }
+
 ```
 **Response:**  
 ```javascript
@@ -152,18 +153,21 @@ Port: `5000`
 ### MeetAI - Text Generation
 **URL:** `/generate_text/<text_model>/<tts_model>/<tts_voice>/<stt_model>/`  
 **Method:** `POST`  
-**Body:** Form data with a file or text inside and the rest of the parameters in the URL. Parameters can be skipped, default values are Windows for <tts_model>, Zira for <tts_voice> and Google for <stt_model>      
+**Body:** Form data with an audio file or text query. Rest of the parameters in the URL. Parameters can be skipped, default values are Windows for <tts_model>, Zira for <tts_voice> and Google for <stt_model>      
 **Response:**  
 ```javascript
 {
-    "status": string,     // Response status: '' 
-                          //                  ''
-                          //                  ''
+    "status": string,     // Response status: 'No file in request' 
+                          //                  'No selected file or file empty'
+                          //                  'File extension not allowed'
+                          //                  'Failed to process input data'
+                          //                  'Unable to find model or voice name'
+                          //                  'Unable to generate speech'
                           //                  'Speech generated successfully'
     "text": string        // Response as text
-    "len": float          // File length
-    "name": string        // File name
-    "file": string        // File encoded with Base64
+    "len": float          // Audio file length in seconds
+    "name": string        // Audio file name
+    "file": string        // Audio file content encoded with Base64
 }
 ```
 
@@ -172,15 +176,5 @@ Port: `5000`
 ### MeetAI - Text Generation
 **URL:** `/generate_image/<image_model>/<stt_model>/`  
 **Method:** `POST`  
-**Body:**   
-```javascript
-{
-
-}
-```
-**Response:**  
-```javascript
-{
-
-}
-```
+**Body:** Form data with an audio file or text containing a description of image. Rest of the parameters in the URL. Parameters can be skipped; the default value is Google for <stt_model>  
+**Response:** Binary image or error code  
