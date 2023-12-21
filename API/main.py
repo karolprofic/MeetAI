@@ -27,10 +27,12 @@ ig = ImageGenerator(PROJECT_DIRECTORY, openAI)
 # Flask config
 app = Flask(__name__)
 
+
 # TODO Run script refactor and conda/venv environment (ask for api key)
 # TODO Postmen new config and test all output
 # TODO Make documentation and Postman/Conda config
 # TODO New documentation with clearer way to show endpoints
+# TODO Finish and test MeetAI Endpoints (Text and Image)
 
 # ==========================
 #       General API
@@ -127,19 +129,37 @@ def status():
 # ==========================
 #        MeetAI API
 # ==========================
-@app.route('/generate_text/<text_model>/', methods=['POST'])
-@app.route('/generate_text/<text_model>/<tts_model>/<tts_voice>/', methods=['POST'])
-@app.route('/generate_text/<text_model>/<tts_model>/<tts_voice>/<stt_model>/', methods=['POST'])
-def generate_text(text_model, tts_model='Windows', tts_voice='Zira', stt_model='Google'):
-    query = process_input(stt_model)
-    if query is None or len(query) == 0:
+@app.route('/generate_text/', methods=['POST'])
+def generate_text():
+    request_data = request.get_json()
+    request_model = request_data["text_model"]
+    request_sst = request_data["stt_model"]
+    request_tts_model = request_data["tts_model"]
+    request_tts_voice = request_data["tts_voice"]
+    request_type = request_data["query_type"]
+    request_query = request_data["query_content"]
+
+    if any(arg is None or arg == "" for arg in [request_model, request_sst, request_tts_model, request_tts_voice, request_type, request_query]):
+        return jsonify({'status': 'Incorrect or missing data'})
+
+    if request_type != 'Microphone' and request_type != 'Keyboard':
+        return jsonify({'status': 'Unknown request type'})
+
+    if request_type == 'Microphone':
+        audio_filename = decode_and_save_file(request_query)
+        transcription = stt.generate(request_sst, audio_filename)
+        if transcription['status'] != 'Speech recognized successfully':
+            return jsonify({'status': 'Unable to recognize speech'})
+        request_query = transcription['text']
+
+    if request_query is None or len(request_query) == 0:
         return jsonify({'status': 'Failed to process input data'})
 
-    tg_result = tg.generate(text_model, query)
+    tg_result = tg.generate(request_model, request_query)
     if tg_result['status'] != 'Text generated successfully':
         return jsonify(tg_result)
 
-    tts_result = tts.generate(tts_model, tts_voice, tg_result['text'])
+    tts_result = tts.generate(request_tts_model, request_tts_voice, tg_result['text'])
     if tts_result['status'] != 'Speech generated successfully':
         return jsonify(tts_result)
 
@@ -151,27 +171,49 @@ def generate_text(text_model, tts_model='Windows', tts_voice='Zira', stt_model='
     file_base64_utf8 = file_base64.decode('utf-8')
 
     return jsonify({
-        'status': 'Speech generated successfully',
+        'status': 'Text generated successfully',
         'text': tg_result['text'],
         'len': tts_result['len'],
-        'name': tts_result['filename'],
         'file': file_base64_utf8
     })
 
 
-@app.route('/generate_image/<image_model>/', methods=['POST'])
-@app.route('/generate_image/<image_model>/<stt_model>/', methods=['POST'])
-def generate_image(image_model, stt_model='Google'):
-    description = process_input(stt_model)
-    if description is None or len(description) == 0:
-        return jsonify({'status': 'Failed to process input data'})
+@app.route('/generate_image/', methods=['POST'])
+def generate_image():
+    request_data = request.get_json()
+    request_model = request_data["image_model"]
+    request_sst = request_data["stt_model"]
+    request_type = request_data["query_type"]
+    request_query = request_data["query_content"]
 
-    result = ig.generate(image_model, description)
+    if any(arg is None or arg == "" for arg in [request_model, request_sst, request_type, request_query]):
+        return jsonify({'status': 'Incorrect or missing data'})
+
+    if request_type != 'Microphone' and request_type != 'Keyboard':
+        return jsonify({'status': 'Unknown request type'})
+
+    if request_type == 'Microphone':
+        audio_filename = decode_and_save_file(request_query)
+        transcription = stt.generate(request_sst, audio_filename)
+        if transcription['status'] != 'Speech recognized successfully':
+            return jsonify({'status': 'Unable to recognize speech'})
+        request_query = transcription['text']
+
+    result = ig.generate(request_model, request_query)
     if result['status'] != 'Image generated successfully':
         return jsonify(result)
 
     filepath = PROJECT_DIRECTORY + result['filename']
-    return send_file(filepath, mimetype="image/png", as_attachment=True)
+    with open(filepath, "rb") as file:
+        file_binary = file.read()
+
+    file_base64 = base64.b64encode(file_binary)
+    file_base64_utf8 = file_base64.decode('utf-8')
+
+    return jsonify({
+        'status': 'Image generated successfully',
+        'file': file_base64_utf8
+    })
 
 
 # ==========================
@@ -197,19 +239,15 @@ def save_file():
     return {'status': 'File uploaded successfully', 'filename': filename}
 
 
-def process_input(stt_model):
-    if request.files.get('file'):
-        result = save_file()
-        if result['status'] != 'File uploaded successfully':
-            return None
+def decode_and_save_file(request_query):
+    filename = datetime.now().strftime(f"query_%d-%m-%Y_%H-%M-%S.wav")
+    filepath = PROJECT_DIRECTORY + filename
+    file_decoded = base64.b64decode(request_query)
 
-        transcription = stt.generate(stt_model, result['filename'])
-        if transcription['status'] != 'Speech recognized successfully':
-            return None
+    with open(filepath, "wb") as file:
+        file.write(file_decoded)
 
-        return transcription['text']
-
-    return request.form.get('text')
+    return filename
 
 
 if __name__ == '__main__':

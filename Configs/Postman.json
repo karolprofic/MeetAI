@@ -246,22 +246,16 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": []
-						},
-						{
-							"key": "text",
-							"value": "",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n    \"text_model\": \"gpt-3.5-turbo\",\r\n    \"stt_model\": \"Google\",\r\n    \"tts_model\": \"OpenAI\",\r\n    \"tts_voice\": \"Alloy\",\r\n    \"query_type\": \"Keyboard\",\r\n    \"query_content\": \"Hello, how are you?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "127.0.0.1:5000/generate_text/<text_model>/<tts_model>/<tts_voice>/<stt_model>/",
+					"raw": "127.0.0.1:5000/generate_text/",
 					"host": [
 						"127",
 						"0",
@@ -271,10 +265,6 @@
 					"port": "5000",
 					"path": [
 						"generate_text",
-						"<text_model>",
-						"<tts_model>",
-						"<tts_voice>",
-						"<stt_model>",
 						""
 					]
 				}
@@ -287,22 +277,16 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": []
-						},
-						{
-							"key": "text",
-							"value": "",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n    \"text_model\": \"dall-e-2\",\r\n    \"stt_model\": \"Google\",\r\n    \"query_type\": \"Keyboard\",\r\n    \"query_content\": \"Cat\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "127.0.0.1:5000/generate_image/<image_model>/<stt_model>/",
+					"raw": "127.0.0.1:5000/generate_image/",
 					"host": [
 						"127",
 						"0",
@@ -312,8 +296,6 @@
 					"port": "5000",
 					"path": [
 						"generate_image",
-						"<image_model>",
-						"<stt_model>",
 						""
 					]
 				}

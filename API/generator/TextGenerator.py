@@ -87,7 +87,7 @@ class TextGenerator:
             return {'status': 'Answer generated successfully', 'output': self.sanitize(response)}
         except Exception as error:
             print(error)
-            return {'status': 'Unable to generate answer'}
+            return {'status': 'Unable to generate text'}
 
     def facebook_blenderbot(self, model, query):
         pass

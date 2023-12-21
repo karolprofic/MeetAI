@@ -19,11 +19,11 @@ Port: `5000`
 **Response:**
 ```javascript
 {
-  "status": string,   // Response status: 'No file in request', 
-                      //                  'No selected file or file empty', 
-                      //                  'File extension not allowed',
-                      //                  'File uploaded successfully',
-  "filename": string  // Optional parameter containing the name given to the file 
+  "status": string,    // Response status: 'No file in request', 
+                       //                  'No selected file or file empty', 
+                       //                  'File extension not allowed',
+                       //                  'File uploaded successfully',
+  "filename": string   // Optional parameter containing the name given to the file 
 }
 ```
 ----
@@ -100,7 +100,7 @@ Port: `5000`
                               //                  'Unable to find model or voice name'
                               //                  'Unable to generate speech'
                               //                  'Speech generated successfully'
-    "filename": string        // Optional parameter with the name of the generated file
+    "filename": string,       // Optional parameter with the name of the generated file
     "len": float              // Optional parameter with the length of the generated file in seconds
 }
 ```
@@ -151,22 +151,33 @@ Port: `5000`
 ---
 
 ### MeetAI - Text Generation
-**URL:** `/generate_text/<text_model>/<tts_model>/<tts_voice>/<stt_model>/`  
+**URL:** `/generate_text/`  
 **Method:** `POST`  
-**Body:** Form data with an audio file or text query. Rest of the parameters in the URL. Parameters can be skipped, default values are Windows for <tts_model>, Zira for <tts_voice> and Google for <stt_model>      
+**Body:** 
+```javascript
+{
+    "text_model": string,      // Text generation model name
+    "stt_model": string,       // SST model name
+    "tts_model": string,       // TTS model name
+    "tts_voice": string,       // TTS voice name
+    "query_type": string,      // Query type 'Microphone' or 'Keyboard'
+    "query_content": string    // If the query type is 'Microphone' then there is an audio file encoded with Base64 inside. 
+                               // But if the query type is 'Keyboard' then there is just plain text.
+}
+```
 **Response:**  
 ```javascript
 {
-    "status": string,     // Response status: 'No file in request' 
-                          //                  'No selected file or file empty'
-                          //                  'File extension not allowed'
+    "status": string,     // Response status: 'Incorrect or missing data' 
+                          //                  'Unknown request type'
                           //                  'Failed to process input data'
+                          //                  'Unable to recognize speech'
+                          //                  'Unable to generate answer'
                           //                  'Unable to find model or voice name'
                           //                  'Unable to generate speech'
-                          //                  'Speech generated successfully'
-    "text": string        // Response as text
-    "len": float          // Audio file length in seconds
-    "name": string        // Audio file name
+                          //                  'Text generated successfully'
+    "text": string,       // Response as text
+    "len": float,         // Audio file length in seconds
     "file": string        // Audio file content encoded with Base64
 }
 ```
@@ -174,7 +185,27 @@ Port: `5000`
 ---
 
 ### MeetAI - Text Generation
-**URL:** `/generate_image/<image_model>/<stt_model>/`  
+**URL:** `/generate_image/`  
 **Method:** `POST`  
-**Body:** Form data with an audio file or text containing a description of image. Rest of the parameters in the URL. Parameters can be skipped; the default value is Google for <stt_model>  
-**Response:** Binary image or error code  
+**Body:** 
+```javascript
+{
+    "image_model": string,     // Image generation model name
+    "stt_model": string,       // SST model name
+    "query_type": string,      // Query type 'Microphone' or 'Keyboard'
+    "query_content": string    // If the query type is 'Microphone' then there is an audio file encoded with Base64 inside. 
+                               // But if the query type is 'Keyboard' then there is just plain text.
+}
+```
+**Response:**
+```javascript
+{
+    "status": string,     // Response status: 'Incorrect or missing data'
+                          //                  'Unknown request type'
+                          //                  'Unable to find model'
+                          //                  'Unable to recognize speech'
+                          //                  'An error occurred: Error message'
+                          //                  'Image generated successfully'
+    "file": string        // Image encoded with Base64
+}
+```
