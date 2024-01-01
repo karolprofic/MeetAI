@@ -36,6 +36,8 @@ class ImageGenerator:
         if model in self.openai_models:
             return self.openai_dalle(description)
 
+        return {'status': 'Unable to find model'}
+
     def stable_diffusion(self, model, description):
         try:
             filename = datetime.now().strftime("image_%d-%m-%Y_%H-%M-%S.png")

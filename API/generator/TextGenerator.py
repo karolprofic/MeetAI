@@ -52,6 +52,8 @@ class TextGenerator:
         if model in self.openai_models:
             return self.openai_gpt(model, query)
 
+        return {'status': 'Unable to find model'}
+
     def microsoft_dialo(self, model, query):
         try:
             if not self.dialo_ai_started:

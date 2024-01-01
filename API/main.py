@@ -1,4 +1,3 @@
-from datetime import datetime
 from converter.TextToSpeech import TextToSpeech
 from converter.SpeechToText import SpeechToText
 from generator.TextGenerator import TextGenerator
@@ -7,7 +6,6 @@ from flask import Flask, request, jsonify, send_file, abort
 from openai import OpenAI
 from utilities import *
 import pyttsx3
-import base64
 
 # Config
 PROJECT_DIRECTORY = create_project_directory("MeetAI")
@@ -146,7 +144,7 @@ def generate_text():
         return jsonify({'status': 'Unknown request type'})
 
     if request_type == 'Microphone':
-        audio_filename = decode_and_save_file(request_query)
+        audio_filename = save_file_and_decode(PROJECT_DIRECTORY, request_query)
         transcription = stt.generate(request_sst, audio_filename)
         if transcription['status'] != 'Speech recognized successfully':
             return jsonify({'status': 'Unable to recognize speech'})
@@ -164,17 +162,11 @@ def generate_text():
         return jsonify(tts_result)
 
     filepath = PROJECT_DIRECTORY + tts_result['filename']
-    with open(filepath, "rb") as file:
-        file_binary = file.read()
-
-    file_base64 = base64.b64encode(file_binary)
-    file_base64_utf8 = file_base64.decode('utf-8')
-
     return jsonify({
         'status': 'Text generated successfully',
         'text': tg_result['text'],
         'len': tts_result['len'],
-        'file': file_base64_utf8
+        'file': load_file_and_encode(filepath)
     })
 
 
@@ -193,7 +185,7 @@ def generate_image():
         return jsonify({'status': 'Unknown request type'})
 
     if request_type == 'Microphone':
-        audio_filename = decode_and_save_file(request_query)
+        audio_filename = save_file_and_decode(PROJECT_DIRECTORY, request_query)
         transcription = stt.generate(request_sst, audio_filename)
         if transcription['status'] != 'Speech recognized successfully':
             return jsonify({'status': 'Unable to recognize speech'})
@@ -204,15 +196,9 @@ def generate_image():
         return jsonify(result)
 
     filepath = PROJECT_DIRECTORY + result['filename']
-    with open(filepath, "rb") as file:
-        file_binary = file.read()
-
-    file_base64 = base64.b64encode(file_binary)
-    file_base64_utf8 = file_base64.decode('utf-8')
-
     return jsonify({
         'status': 'Image generated successfully',
-        'file': file_base64_utf8
+        'file': load_file_and_encode(filepath)
     })
 
 
@@ -237,17 +223,6 @@ def save_file():
     file.save(filepath)
 
     return {'status': 'File uploaded successfully', 'filename': filename}
-
-
-def decode_and_save_file(request_query):
-    filename = datetime.now().strftime(f"query_%d-%m-%Y_%H-%M-%S.wav")
-    filepath = PROJECT_DIRECTORY + filename
-    file_decoded = base64.b64decode(request_query)
-
-    with open(filepath, "wb") as file:
-        file.write(file_decoded)
-
-    return filename
 
 
 if __name__ == '__main__':
