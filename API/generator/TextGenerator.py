@@ -7,6 +7,7 @@ import torch
 # TODO Text generation OpenAI
 # TODO Code refactor and check input
 
+
 class TextGenerator:
     def __init__(self, path, openAI):
         self.path = path

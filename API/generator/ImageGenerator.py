@@ -1,5 +1,4 @@
-from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
-from datetime import datetime
+from diffusers import StableDiffusionPipeline
 from utilities import *
 import torch
 
@@ -9,6 +8,7 @@ import torch
 # TODO Endpoint should return binary image or error
 # TODO Generator method refactor and evaluate model choice
 # TODO Code refactor and check input
+
 
 class ImageGenerator:
     def __init__(self, path, openAI):
