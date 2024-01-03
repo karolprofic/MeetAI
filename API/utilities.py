@@ -1,6 +1,7 @@
 from datetime import datetime
 import soundfile
 import base64
+import json
 import glob
 import os
 
@@ -30,9 +31,23 @@ def resample_file(input_path, output_path):
     soundfile.write(output_path, data, samplerate, subtype='PCM_16')
 
 
-def set_environment_variables():
-    if os.environ.get('OPENAI_API_KEY') is None:
-        os.environ.setdefault('OPENAI_API_KEY', '')
+def load_config():
+    try:
+        with open('./environment/config.env', 'r') as file:
+            current_config = json.load(file)
+    except Exception as e:
+        print(f"Load config error: {e}")
+        return
+
+    for key, value in current_config.items():
+        os.environ[key] = value
+
+    return current_config
+
+
+def save_config(current_config):
+    with open('./environment/config.env', 'w') as file:
+        json.dump(current_config, file, indent=4)
 
 
 def load_file_and_encode(filepath):
@@ -53,3 +68,10 @@ def save_file_and_decode(project_directory, request_query):
         file.write(file_decoded)
 
     return filename
+
+
+def sanitize(string):
+    characters = ['\"', '\'', '\\', '\r']
+    for char in characters:
+        string = string.replace(char, " ")
+    return string

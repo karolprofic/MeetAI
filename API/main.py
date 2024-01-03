@@ -12,7 +12,7 @@ PROJECT_DIRECTORY = create_project_directory("MeetAI")
 ALLOWED_EXTENSIONS = ['png', 'wav']
 
 # Libraries
-set_environment_variables()
+config = load_config()
 pyttsx = pyttsx3.init()
 openAI = OpenAI()
 
@@ -45,8 +45,9 @@ def set_api_key():
         return jsonify({'status': 'Incorrect request parameters'})
 
     if request_api == "OpenAI":
-        os.environ['OPENAI_API_KEY'] = str(request_key)
-        openAI.api_key = os.environ['OPENAI_API_KEY']
+        config['OPENAI_API_KEY'] = str(request_key)
+        openAI.api_key = str(request_key)
+        save_config(config)
         return jsonify({'status': 'OpenAI API key added successfully'})
 
     return jsonify({'status': 'Requested API is not supported'})
