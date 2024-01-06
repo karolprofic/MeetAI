@@ -1,3 +1,6 @@
+import base64
+from datetime import datetime
+
 from converter.TextToSpeech import TextToSpeech
 from converter.SpeechToText import SpeechToText
 from generator.TextGenerator import TextGenerator
@@ -138,14 +141,15 @@ def generate_text():
     request_type = request_data["query_type"]
     request_query = request_data["query_content"]
 
-    if any(arg is None or arg == "" for arg in [request_model, request_sst, request_tts_model, request_tts_voice, request_type, request_query]):
+    if any(arg is None or arg == "" for arg in
+           [request_model, request_sst, request_tts_model, request_tts_voice, request_type, request_query]):
         return jsonify({'status': 'Incorrect or missing data'})
 
     if request_type != 'Microphone' and request_type != 'Keyboard':
         return jsonify({'status': 'Unknown request type'})
 
     if request_type == 'Microphone':
-        audio_filename = save_file_and_decode(PROJECT_DIRECTORY, request_query)
+        audio_filename = decode_and_save_file(PROJECT_DIRECTORY, request_query)
         transcription = stt.generate(request_sst, audio_filename)
         if transcription['status'] != 'Speech recognized successfully':
             return jsonify({'status': 'Unable to recognize speech'})
@@ -166,7 +170,7 @@ def generate_text():
         'status': 'Text generated successfully',
         'text': sanitize(tg_result['text']),
         'len': tts_result['len'],
-        'file': tts_result['filename']
+        'filename': tts_result['filename']
     })
 
 
@@ -185,7 +189,9 @@ def generate_image():
         return jsonify({'status': 'Unknown request type'})
 
     if request_type == 'Microphone':
-        audio_filename = save_file_and_decode(PROJECT_DIRECTORY, request_query)
+        audio_filename = decode_and_save_file(PROJECT_DIRECTORY, request_query)
+        print(audio_filename)
+        return jsonify({'status': 'testowy test'})
         transcription = stt.generate(request_sst, audio_filename)
         if transcription['status'] != 'Speech recognized successfully':
             return jsonify({'status': 'Unable to recognize speech'})
@@ -195,10 +201,9 @@ def generate_image():
     if result['status'] != 'Image generated successfully':
         return jsonify(result)
 
-    filepath = PROJECT_DIRECTORY + result['filename']
     return jsonify({
         'status': 'Image generated successfully',
-        'file': load_image_and_encode(filepath)
+        'filename': result['filename']
     })
 
 
@@ -223,6 +228,17 @@ def save_file():
     file.save(filepath)
 
     return {'status': 'File uploaded successfully', 'filename': filename}
+
+
+def decode_and_save_file(project_directory, request_query):
+    filename = datetime.now().strftime(f"query_%d-%m-%Y_%H-%M-%S.wav")
+    filepath = project_directory + filename
+    file_decoded = base64.b64decode(request_query)
+
+    with open(filepath, "wb") as file:
+        file.write(file_decoded)
+
+    return filename
 
 
 if __name__ == '__main__':
