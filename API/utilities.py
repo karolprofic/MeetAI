@@ -50,7 +50,7 @@ def save_config(current_config):
         json.dump(current_config, file, indent=4)
 
 
-def load_file_and_encode(filepath):
+def load_image_and_encode(filepath):
     with open(filepath, "rb") as file:
         file_binary = file.read()
 

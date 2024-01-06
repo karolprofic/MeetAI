@@ -162,12 +162,11 @@ def generate_text():
     if tts_result['status'] != 'Speech generated successfully':
         return jsonify(tts_result)
 
-    filepath = PROJECT_DIRECTORY + tts_result['filename']
     return jsonify({
         'status': 'Text generated successfully',
-        'text': tg_result['text'],
+        'text': sanitize(tg_result['text']),
         'len': tts_result['len'],
-        'file': load_file_and_encode(filepath)
+        'file': tts_result['filename']
     })
 
 
@@ -199,7 +198,7 @@ def generate_image():
     filepath = PROJECT_DIRECTORY + result['filename']
     return jsonify({
         'status': 'Image generated successfully',
-        'file': load_file_and_encode(filepath)
+        'file': load_image_and_encode(filepath)
     })
 
 
