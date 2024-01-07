@@ -49,7 +49,7 @@ def save_config(current_config):
 
 
 def sanitize(string):
-    characters = ['\"', '\'', '\\', '\r']
+    characters = ['\"', '\'', '\\', '\r', '\n']
     for char in characters:
         string = string.replace(char, " ")
     return string

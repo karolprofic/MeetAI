@@ -1,11 +1,9 @@
-import base64
-from datetime import datetime
-
 from converter.TextToSpeech import TextToSpeech
 from converter.SpeechToText import SpeechToText
 from generator.TextGenerator import TextGenerator
 from generator.ImageGenerator import ImageGenerator
 from flask import Flask, request, jsonify, send_file, abort
+from datetime import datetime
 from openai import OpenAI
 from utilities import *
 import pyttsx3
@@ -58,7 +56,7 @@ def set_api_key():
 
 @app.route('/speech_to_text/<model>/', methods=['POST'])
 def speech_to_text(model):
-    result = save_file()
+    result = upload_file()
 
     if result['status'] != 'File uploaded successfully':
         return jsonify(result)
@@ -118,9 +116,42 @@ def download_file(filename):
     return send_file(filepath, mimetype=mimetype, as_attachment=True)
 
 
-@app.route('/upload_file/', methods=['POST'])
+@app.route('/upload_file/<mimetype>/', methods=['POST'])
 def upload_file():
-    return jsonify(save_file())
+    if 'file' not in request.files:
+        return {'status': 'No file in request'}
+
+    file = request.files['file']
+    if file.filename == '' or file is None:
+        return {'status': 'No selected file or file empty'}
+
+    extension = file.filename.rsplit('.', 1)[-1].lower()
+    if extension not in ALLOWED_EXTENSIONS:
+        return {'status': 'File extension not allowed'}
+
+    filetype = "image" if extension == "png" else "audio"
+    filename = datetime.now().strftime(f"{filetype}_%d-%m-%Y_%H-%M-%S.{extension}")
+    filepath = PROJECT_DIRECTORY + filename
+    file.save(filepath)
+
+    return {'status': 'File uploaded successfully', 'filename': filename}
+
+
+@app.route('/upload_binary_file/<extension>/', methods=['POST'])
+def upload_binary_file(extension):
+    if extension not in ALLOWED_EXTENSIONS:
+        return {'status': 'Not allowed file extension'}
+
+    if len(request.data) == 0:
+        return {'status': 'The content of the request is empty'}
+
+    filetype = "image" if extension == "png" else "audio"
+    filename = datetime.now().strftime(f"{filetype}_%d-%m-%Y_%H-%M-%S.{extension}")
+    filepath = PROJECT_DIRECTORY + filename
+    with open(filepath, "wb") as file:
+        file.write(request.data)
+
+    return {'status': 'File uploaded successfully', 'filename': filename}
 
 
 @app.route('/status/', methods=['POST'])
@@ -149,8 +180,7 @@ def generate_text():
         return jsonify({'status': 'Unknown request type'})
 
     if request_type == 'Microphone':
-        audio_filename = decode_and_save_file(PROJECT_DIRECTORY, request_query)
-        transcription = stt.generate(request_sst, audio_filename)
+        transcription = stt.generate(request_sst, request_query)
         if transcription['status'] != 'Speech recognized successfully':
             return jsonify({'status': 'Unable to recognize speech'})
         request_query = transcription['text']
@@ -189,8 +219,7 @@ def generate_image():
         return jsonify({'status': 'Unknown request type'})
 
     if request_type == 'Microphone':
-        audio_filename = decode_and_save_file(PROJECT_DIRECTORY, request_query)
-        transcription = stt.generate(request_sst, audio_filename)
+        transcription = stt.generate(request_sst, request_query)
         if transcription['status'] != 'Speech recognized successfully':
             return jsonify({'status': 'Unable to recognize speech'})
         request_query = transcription['text']
@@ -203,40 +232,6 @@ def generate_image():
         'status': 'Image generated successfully',
         'filename': result['filename']
     })
-
-
-# ==========================
-#       Helpers
-# ==========================
-def save_file():
-    if 'file' not in request.files:
-        return {'status': 'No file in request'}
-
-    file = request.files['file']
-    if file.filename == '' or file is None:
-        return {'status': 'No selected file or file empty'}
-
-    extension = file.filename.rsplit('.', 1)[-1].lower()
-    if extension not in ALLOWED_EXTENSIONS:
-        return {'status': 'File extension not allowed'}
-
-    filetype = "image" if extension == "png" else "audio"
-    filename = datetime.now().strftime(f"{filetype}_%d-%m-%Y_%H-%M-%S.{extension}")
-    filepath = PROJECT_DIRECTORY + filename
-    file.save(filepath)
-
-    return {'status': 'File uploaded successfully', 'filename': filename}
-
-
-def decode_and_save_file(project_directory, request_query):
-    filename = datetime.now().strftime(f"query_%d-%m-%Y_%H-%M-%S.wav")
-    filepath = project_directory + filename
-    file_decoded = base64.b64decode(request_query)
-
-    with open(filepath, "wb") as file:
-        file.write(file_decoded)
-
-    return filename
 
 
 if __name__ == '__main__':

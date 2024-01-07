@@ -24,6 +24,7 @@ class TextToSpeech:
 
     def generate(self, model, voice, text):
         model = model.lower().replace(" ", "_")
+        voice = voice.lower().replace(" ", "_")
 
         if model == "dummy":
             return {'status': 'Speech generated successfully', 'filename': 'example.wav', 'len': 0.2}

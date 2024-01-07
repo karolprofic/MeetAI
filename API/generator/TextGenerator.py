@@ -13,7 +13,7 @@ class TextGenerator:
         self.path = path
         self.openAI = openAI
         self.openai_messages = [
-            {"role": "system", "content": ""},
+            {"role": "system", "content": "You are a helpful assistant."},
         ]
         # Supported models
         self.openai_models = [
@@ -107,7 +107,7 @@ class TextGenerator:
             print(f"OpenAI API returned an error: {e}")
             return {'status': 'Unable to generate text'}
 
-        response_content = response['choices'][0]['message']['content']
+        response_content = response.choices[0].message.content
         self.openai_messages.append({"role": "assistant", "content": response_content})
 
         return {'status': 'Text generated successfully', 'text': response_content}
