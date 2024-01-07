@@ -1,6 +1,10 @@
 # API Documentation
 Address: `127.0.0.1`  
-Port: `5000`
+Port: `5000`  
+
+----
+### Additional information
+In the response, only the status field is always set, other fields are set depending on the request status.
 
 ---
 
@@ -23,7 +27,7 @@ Port: `5000`
                        //                  'No selected file or file empty', 
                        //                  'File extension not allowed',
                        //                  'File uploaded successfully',
-  "filename": string   // Optional parameter containing the name given to the file 
+  "filename": string   // Uploaded file name
 }
 ```
 ----
@@ -76,7 +80,7 @@ Port: `5000`
                         //                  'Unable to find model'
                         //                  'Unable to recognize speech'
                         //                  'Speech recognized successfully'
-    "text": string      // Optional parameter with recognized text
+    "text": string      // Recognized text
 }
 ```
 
@@ -100,8 +104,8 @@ Port: `5000`
                               //                  'Unable to find model or voice name'
                               //                  'Unable to generate speech'
                               //                  'Speech generated successfully'
-    "filename": string,       // Optional parameter with the name of the generated file
-    "len": float              // Optional parameter with the length of the generated file in seconds
+    "filename": string,       // Name of the generated file
+    "len": float              // Length of the generated file in seconds
 }
 ```
 
@@ -123,7 +127,7 @@ Port: `5000`
     "status": string,        // Response status: 'Incorrect or missing data' 
                              //                  'An error occurred: Error message'
                              //                  'Image generated successfully'
-    "filename": string       // Optional parameter with the name of the generated file
+    "filename": string       // Name of the generated file
 }
 ```
 

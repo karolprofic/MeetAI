@@ -190,8 +190,6 @@ def generate_image():
 
     if request_type == 'Microphone':
         audio_filename = decode_and_save_file(PROJECT_DIRECTORY, request_query)
-        print(audio_filename)
-        return jsonify({'status': 'testowy test'})
         transcription = stt.generate(request_sst, audio_filename)
         if transcription['status'] != 'Speech recognized successfully':
             return jsonify({'status': 'Unable to recognize speech'})
