@@ -28,10 +28,8 @@ app = Flask(__name__)
 
 
 # TODO Run script refactor and conda/venv environment (ask for api key)
-# TODO Postmen new config and test all output
-# TODO Make documentation and Postman/Conda config
-# TODO New documentation with clearer way to show endpoints
-# TODO Finish and test MeetAI Endpoints (Text and Image)
+# TODO Finish and test all MeetAI Endpoints (All options)
+
 
 # ==========================
 #       General API

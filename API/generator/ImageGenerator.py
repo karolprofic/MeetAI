@@ -5,12 +5,7 @@ import requests
 import torch
 
 
-# TODO Finish implementation of ImageGenerator
-# TODO Tested Image: "CompVis/stable-diffusion-v1-4" / "stabilityai/stable-diffusion-2"
-# TODO Stable Diffusion 2 dont work
-# TODO Endpoint should return binary image or error
-# TODO Generator method refactor and evaluate model choice
-# TODO Code refactor and check input
+# TODO Stable Diffusion dont work
 
 
 class ImageGenerator:
