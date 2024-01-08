@@ -35,7 +35,7 @@ class TextToSpeech:
         if model in self.openai_models and voice in self.openai_voices:
             return self.openai_tts(text, voice)
 
-        return {'status': 'Unable to find model or voice name'}
+        return {'status': 'Unable to find model'}
 
     def openai_tts(self, text, voice):
         try:
@@ -77,8 +77,8 @@ class TextToSpeech:
             self.pyttsx.save_to_file(text, path)
             self.pyttsx.runAndWait()
             return {'status': 'Speech generated successfully', 'filename': filename, 'len': self.file_duration(path)}
-        except Exception as error:
-            print(error)
+        except Exception as e:
+            print(f"Pyttsx returned an error: {e}")
             return {'status': 'Unable to generate speech'}
 
     def create_path(self):

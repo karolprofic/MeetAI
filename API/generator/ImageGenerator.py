@@ -55,7 +55,8 @@ class ImageGenerator:
             image.save(filepath)
             return {'status': 'Image generated successfully', 'filename': filename}
         except Exception as e:
-            return {'status': f'An error occurred: {e}'}
+            print(f"Stable Diffusion returned an error: {e}")
+            return {'status': 'Unable to generated image'}
 
     def openai_dall_e(self, model, description):
         try:
@@ -67,7 +68,8 @@ class ImageGenerator:
                 n=1,
             )
         except Exception as e:
-            return {'status': f'An error occurred: {e}'}
+            print(f"Dall-e API returned an error: {e}")
+            return {'status': 'Unable to generated image'}
 
         response = requests.get(response.data[0].url)
         filename = datetime.now().strftime("image_%d-%m-%Y_%H-%M-%S.png")

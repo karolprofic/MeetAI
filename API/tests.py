@@ -47,7 +47,7 @@ def text_generation_short_answer():
 # ==========================
 @app.route('/image_generation_fail/', methods=['POST'])
 def image_generation_fail():
-    return jsonify({'status': 'An error occurred'})
+    return jsonify({'status': 'Unable to generated image'})
 
 
 @app.route('/image_generation_large_file/', methods=['POST'])

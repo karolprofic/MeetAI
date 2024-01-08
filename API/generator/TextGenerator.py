@@ -87,9 +87,9 @@ class TextGenerator:
                 padding_side='left'
             )
             self.dialo_ai_step = self.dialo_ai_step + 1
-            return {'status': 'Answer generated successfully', 'output': self.sanitize(response)}
-        except Exception as error:
-            print(error)
+            return {'status': 'Text generated successfully', 'text': self.sanitize(response)}
+        except Exception as e:
+            print(f"Dialo returned an error: {e}")
             return {'status': 'Unable to generate text'}
 
     def facebook_blenderbot(self, model, query):

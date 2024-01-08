@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e2b467bb-7c48-4092-a466-8aef438f99d8",
+		"_postman_id": "cea81244-e7ae-4927-8749-f02fd5eaf023",
 		"name": "MeetAI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31248555"
@@ -30,7 +30,7 @@
 			"response": []
 		},
 		{
-			"name": "Upload File",
+			"name": "Upload Form File",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -45,7 +45,7 @@
 					]
 				},
 				"url": {
-					"raw": "127.0.0.1:5000/upload_file/",
+					"raw": "127.0.0.1:5000/upload_form_file/",
 					"host": [
 						"127",
 						"0",
@@ -54,7 +54,34 @@
 					],
 					"port": "5000",
 					"path": [
-						"upload_file",
+						"upload_form_file",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Binary File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/upload_binary_file/<extension>/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"upload_binary_file",
+						"<extension>",
 						""
 					]
 				}
@@ -241,13 +268,13 @@
 			"response": []
 		},
 		{
-			"name": "MeetAI - Text Generation",
+			"name": "MeetAI Text Generation",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"text_model\": \"gpt-3.5-turbo\",\r\n    \"stt_model\": \"Google\",\r\n    \"tts_model\": \"OpenAI\",\r\n    \"tts_voice\": \"Alloy\",\r\n    \"query_type\": \"Keyboard\",\r\n    \"query_content\": \"Hello, how are you?\"\r\n}",
+					"raw": "{\r\n    \"text_model\": \"Text generation model name\",\r\n    \"stt_model\": \"SST model name\",\r\n    \"tts_model\": \"TTS model name\",\r\n    \"tts_voice\": \"TTS voice name\",\r\n    \"query_type\": \"Query type Keyboard or Microphone\",\r\n    \"query_content\": \"Query to ask\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -255,7 +282,7 @@
 					}
 				},
 				"url": {
-					"raw": "127.0.0.1:5000/generate_text/",
+					"raw": "127.0.0.1:5000/meet_ai_generate_text/",
 					"host": [
 						"127",
 						"0",
@@ -264,7 +291,7 @@
 					],
 					"port": "5000",
 					"path": [
-						"generate_text",
+						"meet_ai_generate_text",
 						""
 					]
 				}
@@ -272,13 +299,13 @@
 			"response": []
 		},
 		{
-			"name": "MeetAI - Image Generation",
+			"name": "MeetAI Image Generation",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"text_model\": \"dall-e-2\",\r\n    \"stt_model\": \"Google\",\r\n    \"query_type\": \"Keyboard\",\r\n    \"query_content\": \"Cat\"\r\n}",
+					"raw": "{\r\n    \"text_model\": \"Image generation model name\",\r\n    \"stt_model\": \"SST model name\",\r\n    \"query_type\": \"Query type Keyboard or Microphone\",\r\n    \"query_content\": \"Image description\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -286,7 +313,7 @@
 					}
 				},
 				"url": {
-					"raw": "127.0.0.1:5000/generate_image/",
+					"raw": "127.0.0.1:5000/meet_ai_generate_image/",
 					"host": [
 						"127",
 						"0",
@@ -295,7 +322,161 @@
 					],
 					"port": "5000",
 					"path": [
-						"generate_image",
+						"meet_ai_generate_image",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests - Text generation fail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/text_generation_fail/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"text_generation_fail",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests - Text generation long answer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/text_generation_long_answer/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"text_generation_long_answer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests - Text generation medium answer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/text_generation_medium_answer/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"text_generation_medium_answer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests - Text generation short answer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/text_generation_short_answer/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"text_generation_short_answer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests - Image generation fail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/image_generation_fail/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"image_generation_fail",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests - Image generation large file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/image_generation_large_file/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"image_generation_large_file",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests - Image generation small file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/image_generation_small_file/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"image_generation_small_file",
 						""
 					]
 				}

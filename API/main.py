@@ -56,7 +56,7 @@ def set_api_key():
 
 @app.route('/speech_to_text/<model>/', methods=['POST'])
 def speech_to_text(model):
-    result = upload_file()
+    result = upload_form_file()
 
     if result['status'] != 'File uploaded successfully':
         return jsonify(result)
@@ -116,8 +116,8 @@ def download_file(filename):
     return send_file(filepath, mimetype=mimetype, as_attachment=True)
 
 
-@app.route('/upload_file/<mimetype>/', methods=['POST'])
-def upload_file():
+@app.route('/upload_form_file/', methods=['POST'])
+def upload_form_file():
     if 'file' not in request.files:
         return {'status': 'No file in request'}
 
@@ -162,8 +162,8 @@ def status():
 # ==========================
 #        MeetAI API
 # ==========================
-@app.route('/generate_text/', methods=['POST'])
-def generate_text():
+@app.route('/meet_ai_generate_text/', methods=['POST'])
+def meet_ai_generate_text():
     request_data = request.get_json()
     request_model = request_data["text_model"]
     request_sst = request_data["stt_model"]
@@ -204,8 +204,8 @@ def generate_text():
     })
 
 
-@app.route('/generate_image/', methods=['POST'])
-def generate_image():
+@app.route('/meet_ai_generate_image/', methods=['POST'])
+def meet_ai_generate_image():
     request_data = request.get_json()
     request_model = request_data["image_model"]
     request_sst = request_data["stt_model"]
