@@ -37,12 +37,6 @@
 - Twinmotion Content for Unreal Engine
 - tropical Vegetation: Pandanus Plants
 
-### AI Models
-- GPT-Neo by EleutherAI
-- DialoGPT by Microsoft
-- Stable Diffusion v1.4 by CompVis
-- Stable Diffusion v2.0 by Stability AI
-
 ### Other
 - Mixamo Animations
 - Unreal Engine

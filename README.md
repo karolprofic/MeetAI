@@ -5,7 +5,8 @@ A virtual environment where you can interact with various artificial intelligenc
 
 - [API Documentation](/Documentation/API.md)
 - [Future development](https://trello.com/b/VQPKXrbN/meetai)
-- [Engine settings](/Documentation/Settings.md)
+- [Engine settings](/Documentation/Engine.md)
+- [Server settings](/Documentation/Server.md)
 - [Attributions](/Documentation/Attributions.md)
 
 ## How to install
@@ -14,7 +15,7 @@ A virtual environment where you can interact with various artificial intelligenc
 2. [Downlaod and install MeetAI](https://drive.google.com/drive/folders/1TAlGZ3nl1YpKFiOE9DgaB1Rktro0MH0l)
 3. Run: MeetAI - Server
 4. Run: MeetAI - Game
-5. Set AI models in Settings -> AI
+5. Set AI models in Settings -> Server
 6. Click Play and have fun
 
 
