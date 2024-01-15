@@ -5,9 +5,6 @@ import requests
 import torch
 
 
-# TODO Stable Diffusion dont work
-
-
 class ImageGenerator:
     def __init__(self, path, openAI):
         self.path = path

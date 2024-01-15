@@ -1,9 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
-# TODO Implement text generation Microsoft
-# TODO Implement text generation Facebook (LLAMA)
-
 
 class TextGenerator:
     def __init__(self, path, openAI):
@@ -23,9 +20,7 @@ class TextGenerator:
             "microsoft/DialoGPT-medium",
             "microsoft/DialoGPT-small",
         ]
-        self.facebook_models = [
 
-        ]
         # DialoGPT
         self.dialo_ai_tokenizer = None
         self.dialo_ai_model = None
@@ -43,9 +38,6 @@ class TextGenerator:
 
         if model in self.microsoft_models:
             return self.microsoft_dialo(model, query)
-
-        if model in self.facebook_models:
-            return self.facebook_blenderbot(model, query)
 
         if model in self.openai_models:
             return self.openai_gpt(model, query)
@@ -88,9 +80,6 @@ class TextGenerator:
         except Exception as e:
             print(f"Dialo returned an error: {e}")
             return {'status': 'Unable to generate text'}
-
-    def facebook_blenderbot(self, model, query):
-        pass
 
     def openai_gpt(self, model, query):
         self.openai_messages.append({"role": "user", "content": query})

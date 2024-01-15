@@ -27,10 +27,6 @@ ig = ImageGenerator(PROJECT_DIRECTORY, openAI)
 app = Flask(__name__)
 
 
-# TODO Run script refactor and conda/venv environment (ask for api key)
-# TODO Finish and test all MeetAI Endpoints (All options)
-
-
 # ==========================
 #       General API
 # ==========================
