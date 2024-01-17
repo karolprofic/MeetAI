@@ -16,9 +16,9 @@ class TextGenerator:
             "gpt-4",
         ]
         self.microsoft_models = [
-            "microsoft/DialoGPT-large",
-            "microsoft/DialoGPT-medium",
-            "microsoft/DialoGPT-small",
+            "microsoft/dialogpt-large",
+            "microsoft/dialogpt-medium",
+            "microsoft/dialogpt-small",
         ]
 
         # DialoGPT

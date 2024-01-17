@@ -11,7 +11,7 @@ class ImageGenerator:
         self.openAI = openAI
         # Supported models
         self.stable_diffusion_models = [
-            "CompVis/stable-diffusion-v1-4",
+            "compvis/stable-diffusion-v1-4",
             "runwayml/stable-diffusion-v1-5",
         ]
         self.openai_models = [
