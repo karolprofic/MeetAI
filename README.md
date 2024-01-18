@@ -13,7 +13,7 @@ A virtual environment where you can interact with various artificial intelligenc
 
 1. [Download and install Miniconda3](https://docs.conda.io/en/latest/miniconda.html)
 2. [Download and install MeetAI](https://drive.google.com/drive/folders/1TAlGZ3nl1YpKFiOE9DgaB1Rktro0MH0l)
-3. Set OpenAI or Hugging Face credentials in config.env if you want to use this service.
+3. Set OpenAI or Hugging Face credentials in config.env if you want to use this services.
 4. Run: MeetAI - Server
 5. Run: MeetAI - Game
 6. Set AI models in Settings -> Server
