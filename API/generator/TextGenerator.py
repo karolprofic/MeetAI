@@ -6,9 +6,12 @@ class TextGenerator:
     def __init__(self, path, openAI):
         self.path = path
         self.openAI = openAI
-        self.openai_messages = [
-            {"role": "system", "content": "You are a helpful assistant."},
-        ]
+        self.openai_messages = [{
+            "role": "system",
+            "content": "You are a AI companion in video game. "
+                       "Answer player questions in a friendly way. "
+                       "Avoid answers in which you say you are AI. "
+        }]
         # Supported models
         self.openai_models = [
             "gpt-3.5-turbo",
