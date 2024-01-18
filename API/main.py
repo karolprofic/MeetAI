@@ -30,24 +30,6 @@ app = Flask(__name__)
 # ==========================
 #       General API
 # ==========================
-@app.route('/set_api_key/', methods=['POST'])
-def set_api_key():
-    request_data = request.get_json()
-    request_api = request_data["api"]
-    request_key = request_data["key"]
-
-    if request_api is None or request_key is None:
-        return jsonify({'status': 'Incorrect request parameters'})
-
-    if request_api == "OpenAI":
-        config['OPENAI_API_KEY'] = str(request_key)
-        openAI.api_key = str(request_key)
-        save_config(config)
-        return jsonify({'status': 'OpenAI API key added successfully'})
-
-    return jsonify({'status': 'Requested API is not supported'})
-
-
 @app.route('/speech_to_text/<model>/', methods=['POST'])
 def speech_to_text(model):
     result = upload_form_file()

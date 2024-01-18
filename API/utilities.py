@@ -1,3 +1,4 @@
+from huggingface_hub import login
 import soundfile
 import json
 import glob
@@ -37,8 +38,12 @@ def load_config():
         print(f"Load config error: {e}")
         return
 
-    for key, value in current_config.items():
-        os.environ[key] = value
+    # Hugging Face
+    if current_config['HUGGINGFACE_ACCESS_TOKEN'] != '':
+        login(current_config['HUGGINGFACE_ACCESS_TOKEN'])
+
+    # OpenAI
+    os.environ['OPENAI_API_KEY'] = current_config['OPENAI_API_KEY']
 
     return current_config
 

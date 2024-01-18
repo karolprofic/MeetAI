@@ -47,28 +47,6 @@ In the response, only the status field is always set, other fields are set depen
 }
 ```
 
-----
-
-### Set API Key
-**URL:** `/set_api_key/`  
-**Method:** `POST`  
-**Body:**   
-```javascript
-{
-    "api": string,       // API Name
-    "key": string        // API Key
-}
-
-```
-**Response:**  
-```javascript
-{
-    "status": string    // Response status: 'Incorrect request parameters' 
-                        //                  'OpenAI API key added successfully'
-                        //                  'Requested API is not supported'
-}
-```
-
 ---
 
 ### Server status
