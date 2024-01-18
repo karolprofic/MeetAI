@@ -34,6 +34,7 @@ if %ENVPATH%=="" (
 
 rem Activate MeetAI Conda enviroment and run API server
 call %CONDAPATH%\Scripts\activate.bat %ENVPATH%
+cd ..
 python main.py
 call conda deactivate
 pause
