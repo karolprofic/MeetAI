@@ -89,37 +89,6 @@
 			"response": []
 		},
 		{
-			"name": "Set API Key",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"api\": \"API Name\",\r\n    \"key\": \"API Key\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:5000/set_api_key/",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"set_api_key",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Server status",
 			"request": {
 				"method": "POST",
