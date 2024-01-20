@@ -190,8 +190,8 @@ In the response, only the status field is always set, other fields are set depen
 
 ---
 
-### MeetAI - Text Generation
-**URL:** `/generate_image/`  
+### MeetAI - Image Generation
+**URL:** `/meet_ai_generate_image/`  
 **Method:** `POST`  
 **Body:** 
 ```javascript
