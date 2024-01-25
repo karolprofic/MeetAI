@@ -1,4 +1,4 @@
-# Server settings
+# Supported AI Models
 
 List of supported and tested AI models and TTS/SST options available in the game.
 

@@ -3,10 +3,10 @@ A virtual environment where you can interact with various artificial intelligenc
 
 ## Resources
 
+- [Supported AI Models](/Documentation/Models.md)
 - [API Documentation](/Documentation/API.md)
 - [Future development](https://trello.com/b/VQPKXrbN/meetai)
 - [Engine settings](/Documentation/Engine.md)
-- [Server settings](/Documentation/Server.md)
 - [Attributions](/Documentation/Attributions.md)
 
 ## How to install
