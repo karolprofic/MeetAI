@@ -9,7 +9,6 @@ List of supported and tested AI models and TTS/SST options available in the game
   - microsoft/DialoGPT-small
 - Paid
   - gpt-3.5-turbo
-  - gpt-4_turbo
   - gpt-4
 
 ### Image Generation (IG)
