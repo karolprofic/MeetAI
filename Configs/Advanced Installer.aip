@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="20.2" version="20.2" Modules="simple" RootPath="." Language="en" Id="{582872FA-8E9B-4514-BEF6-8C34DD7ED3A3}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="20.2" version="21.4" Modules="simple" RootPath="." Language="en" Id="{582872FA-8E9B-4514-BEF6-8C34DD7ED3A3}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
     <ROW Name="HiddenItems" Value="AppXProductDetailsComponent;AppXDependenciesComponent;AppXAppDetailsComponent;AppXVisualAssetsComponent;AppXCapabilitiesComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;FixupComponent;MsiXDiffComponent;MsixManifestEditorComponent"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_CURRENT_YEAR" Value="2022" ValueLocId="-"/>
-    <ROW Property="AI_PACKAGING_TOOL" Value="Advanced Installer 20.2 build 2c3f1cf9" ValueLocId="-"/>
     <ROW Property="ALLUSERS" Value="1"/>
-    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPNOMODIFY" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPNOREPAIR" Value="1"/>
     <ROW Property="ARPPRODUCTICON" Value="MeetAI_1.exe" Type="8"/>
@@ -16,7 +13,7 @@
     <ROW Property="ProductCode" Value="1033:{8DC8E2A3-6B2C-4299-B812-1613592B45C5} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="MeetAI"/>
-    <ROW Property="ProductVersion" Value="1.0.0"/>
+    <ROW Property="ProductVersion" Value="1.0.0" Options="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{208D0310-6E0E-4C95-981F-A5D877C22143}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -28,72 +25,89 @@
     <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
     <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
     <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT64" MultiBuildValue="DefaultBuild:Windows Vista x64, Windows Server 2008 x64, Windows 7 x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 8.1 x64, Windows Server 2012 R2 x64, Windows Server x64" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT64Display" MultiBuildValue="DefaultBuild:Windows Vista x64, Windows Server 2008 x64, Windows 7 x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 8.1 x64, Windows Server 2012 R2 x64, Windows Server x64" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60Display" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT64" MultiBuildValue="DefaultBuild:Windows 7 x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 8.1 x64, Windows Server 2012 R2 x64, Windows Server x64" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT64Display" MultiBuildValue="DefaultBuild:Windows 7 x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 8.1 x64, Windows Server 2012 R2 x64, Windows Server x64" ValueLocId="-"/>
     <ROW Property="WindowsTypeNTDisplay" MultiBuildValue="DefaultBuild:32-bit Windows versions" ValueLocId="-"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
-    <ROW Directory="API_Dir" Directory_Parent="APPDIR" DefaultDir="API"/>
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
-    <ROW Directory="Binaries_1_Dir" Directory_Parent="MeetAI_Dir" DefaultDir="Binaries"/>
+    <ROW Directory="Binaries_2_Dir" Directory_Parent="MeetAI_Dir" DefaultDir="Binaries"/>
     <ROW Directory="Binaries_Dir" Directory_Parent="Engine_Dir" DefaultDir="Binaries"/>
-    <ROW Directory="Content_Dir" Directory_Parent="MeetAI_Dir" DefaultDir="Content"/>
-    <ROW Directory="D3D12_Dir" Directory_Parent="Win64_5_Dir" DefaultDir="D3D12"/>
+    <ROW Directory="Content_2_Dir" Directory_Parent="MeetAI_Dir" DefaultDir="Content"/>
+    <ROW Directory="Content_Dir" Directory_Parent="Engine_Dir" DefaultDir="Content"/>
+    <ROW Directory="Cursor_Dir" Directory_Parent="Slate_Dir" DefaultDir="Cursor"/>
+    <ROW Directory="D3D12_Dir" Directory_Parent="Win64_6_Dir" DefaultDir="D3D12"/>
     <ROW Directory="DbgHelp_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="DbgHelp"/>
     <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="Engine_Dir" Directory_Parent="Game_Dir" DefaultDir="Engine"/>
     <ROW Directory="Extras_Dir" Directory_Parent="Engine_Dir" DefaultDir="Extras"/>
     <ROW Directory="Game_Dir" Directory_Parent="APPDIR" DefaultDir="Game"/>
-    <ROW Directory="GeForceNOW_Dir" Directory_Parent="NVIDIA_Dir" DefaultDir="GEFORC~1|GeForceNOW"/>
     <ROW Directory="MeetAI_Dir" Directory_Parent="Game_Dir" DefaultDir="MeetAI"/>
+    <ROW Directory="MsQuic_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="MsQuic"/>
     <ROW Directory="NVIDIA_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="NVIDIA"/>
     <ROW Directory="NVaftermath_Dir" Directory_Parent="NVIDIA_Dir" DefaultDir="NVAFTE~1|NVaftermath"/>
     <ROW Directory="Ogg_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="Ogg"/>
-    <ROW Directory="Paks_Dir" Directory_Parent="Content_Dir" DefaultDir="Paks"/>
-    <ROW Directory="PhysX3_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="PhysX3"/>
+    <ROW Directory="OpenXR_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="OpenXR"/>
+    <ROW Directory="Paks_Dir" Directory_Parent="Content_2_Dir" DefaultDir="Paks"/>
     <ROW Directory="Redist_Dir" Directory_Parent="Extras_Dir" DefaultDir="Redist"/>
+    <ROW Directory="Server_Dir" Directory_Parent="APPDIR" DefaultDir="Server"/>
+    <ROW Directory="Slate_Dir" Directory_Parent="Content_Dir" DefaultDir="Slate"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="ThirdParty_Dir" Directory_Parent="Binaries_Dir" DefaultDir="THIRDP~1|ThirdParty"/>
-    <ROW Directory="VS2015_1_Dir" Directory_Parent="Win64_3_Dir" DefaultDir="VS2015"/>
-    <ROW Directory="VS2015_2_Dir" Directory_Parent="Win64_4_Dir" DefaultDir="VS2015"/>
-    <ROW Directory="VS2015_Dir" Directory_Parent="Win64_2_Dir" DefaultDir="VS2015"/>
+    <ROW Directory="VS2015_2_Dir" Directory_Parent="Win64_5_Dir" DefaultDir="VS2015"/>
+    <ROW Directory="VS2015_Dir" Directory_Parent="Win64_4_Dir" DefaultDir="VS2015"/>
     <ROW Directory="Vorbis_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="Vorbis"/>
-    <ROW Directory="Win64_1_Dir" Directory_Parent="NVaftermath_Dir" DefaultDir="Win64"/>
-    <ROW Directory="Win64_2_Dir" Directory_Parent="Ogg_Dir" DefaultDir="Win64"/>
-    <ROW Directory="Win64_3_Dir" Directory_Parent="PhysX3_Dir" DefaultDir="Win64"/>
-    <ROW Directory="Win64_4_Dir" Directory_Parent="Vorbis_Dir" DefaultDir="Win64"/>
-    <ROW Directory="Win64_5_Dir" Directory_Parent="Binaries_1_Dir" DefaultDir="Win64"/>
-    <ROW Directory="Win64_Dir" Directory_Parent="GeForceNOW_Dir" DefaultDir="Win64"/>
+    <ROW Directory="Win64_4_Dir" Directory_Parent="Ogg_Dir" DefaultDir="Win64"/>
+    <ROW Directory="Win64_5_Dir" Directory_Parent="Vorbis_Dir" DefaultDir="Win64"/>
+    <ROW Directory="Win64_6_Dir" Directory_Parent="Binaries_2_Dir" DefaultDir="Win64"/>
+    <ROW Directory="Win64_Dir" Directory_Parent="NVaftermath_Dir" DefaultDir="Win64"/>
+    <ROW Directory="WinPixEventRuntime_Dir" Directory_Parent="Windows_Dir" DefaultDir="WINPIX~1|WinPixEventRuntime"/>
     <ROW Directory="Windows_Dir" Directory_Parent="ThirdParty_Dir" DefaultDir="Windows"/>
     <ROW Directory="XAudio2_9_Dir" Directory_Parent="Windows_Dir" DefaultDir="XAUDIO~1|XAudio2_9"/>
+    <ROW Directory="content_Dir" Directory_Parent="Server_Dir" DefaultDir="content"/>
+    <ROW Directory="converter_Dir" Directory_Parent="Server_Dir" DefaultDir="CONVER~1|converter"/>
     <ROW Directory="enus_Dir" Directory_Parent="Redist_Dir" DefaultDir="en-us"/>
-    <ROW Directory="x64_Dir" Directory_Parent="XAudio2_9_Dir" DefaultDir="x64"/>
+    <ROW Directory="environment_Dir" Directory_Parent="Server_Dir" DefaultDir="ENVIRO~1|environment"/>
+    <ROW Directory="generator_Dir" Directory_Parent="Server_Dir" DefaultDir="GENERA~1|generator"/>
+    <ROW Directory="img_Dir" Directory_Parent="content_Dir" DefaultDir="img"/>
+    <ROW Directory="v220_Dir" Directory_Parent="MsQuic_Dir" DefaultDir="v220"/>
+    <ROW Directory="wav_Dir" Directory_Parent="content_Dir" DefaultDir="wav"/>
+    <ROW Directory="win64_2_Dir" Directory_Parent="OpenXR_Dir" DefaultDir="win64"/>
+    <ROW Directory="win64_Dir" Directory_Parent="v220_Dir" DefaultDir="win64"/>
+    <ROW Directory="x64_2_Dir" Directory_Parent="XAudio2_9_Dir" DefaultDir="x64"/>
+    <ROW Directory="x64_Dir" Directory_Parent="WinPixEventRuntime_Dir" DefaultDir="x64"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="APPDIR" ComponentId="{61B56500-1676-4128-AF1B-41393D85A064}" Directory_="APPDIR" Attributes="0"/>
-    <ROW Component="D3D12Core.dll" ComponentId="{34348948-837B-49E1-A078-0B9470E55630}" Directory_="D3D12_Dir" Attributes="256" KeyPath="D3D12Core.dll"/>
-    <ROW Component="GFSDK_Aftermath_Lib.x64.dll" ComponentId="{8999F3E7-EA51-4148-A022-5A0AC6A7D221}" Directory_="Win64_1_Dir" Attributes="256" KeyPath="GFSDK_Aftermath_Lib.x64.dll"/>
-    <ROW Component="GfnRuntimeSdk.dll" ComponentId="{F720887B-9EEB-4BFC-8839-19013B605E21}" Directory_="Win64_Dir" Attributes="256" KeyPath="GfnRuntimeSdk.dll"/>
-    <ROW Component="MeetAI.exe" ComponentId="{2C35A19D-3F5D-4964-9D6E-B5A57FB38201}" Directory_="Game_Dir" Attributes="256" KeyPath="MeetAI.exe"/>
-    <ROW Component="MeetAIWin64Shipping.exe" ComponentId="{F7637D1F-82A4-4DD2-A5FF-0D0A242908DD}" Directory_="Win64_5_Dir" Attributes="256" KeyPath="MeetAIWin64Shipping.exe"/>
-    <ROW Component="OpenImageDenoise.dll" ComponentId="{DF38AA76-B95C-42EB-8A87-09149ABE62B4}" Directory_="Win64_5_Dir" Attributes="256" KeyPath="OpenImageDenoise.dll"/>
-    <ROW Component="PhysX3Common_x64.dll" ComponentId="{E8E447D2-F8A2-4C4B-910B-70B0496FCB55}" Directory_="VS2015_1_Dir" Attributes="256" KeyPath="PhysX3Common_x64.dll"/>
-    <ROW Component="PhysX3Cooking_x64.dll" ComponentId="{ACC0B71E-F344-401D-95D9-5A2C729B9D30}" Directory_="VS2015_1_Dir" Attributes="256" KeyPath="PhysX3Cooking_x64.dll"/>
-    <ROW Component="PhysX3_x64.dll" ComponentId="{10A3A5B6-78E7-442C-9A4C-C7880CEB33E9}" Directory_="VS2015_1_Dir" Attributes="256" KeyPath="PhysX3_x64.dll"/>
-    <ROW Component="ProductInformation" ComponentId="{8DC8CAD0-4626-4C4A-8CF7-E6764F2761C7}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
-    <ROW Component="PxFoundation_x64.dll" ComponentId="{C39C5E06-E0A5-4417-85B0-7D5201839C81}" Directory_="VS2015_1_Dir" Attributes="256" KeyPath="PxFoundation_x64.dll"/>
-    <ROW Component="PxPvdSDK_x64.dll" ComponentId="{8C774537-26F5-43AF-9D61-63C2B76D736D}" Directory_="VS2015_1_Dir" Attributes="256" KeyPath="PxPvdSDK_x64.dll"/>
-    <ROW Component="UEPrereqSetup_x64.exe" ComponentId="{E37D47E9-9D28-4F39-8B69-65113F58EC8D}" Directory_="enus_Dir" Attributes="0" KeyPath="UEPrereqSetup_x64.exe"/>
-    <ROW Component="conda.yaml" ComponentId="{160618CA-0498-405E-A238-2254D140CD03}" Directory_="API_Dir" Attributes="0" KeyPath="conda.yaml" Type="0"/>
-    <ROW Component="dbghelp.dll" ComponentId="{05FE0CEC-17AA-44AE-B51E-6ABEC7FA6FB7}" Directory_="DbgHelp_Dir" Attributes="256" KeyPath="dbghelp.dll"/>
-    <ROW Component="global.ucas" ComponentId="{24D5E3EB-D11A-4C87-B2AA-D60BA8330742}" Directory_="Paks_Dir" Attributes="0" KeyPath="global.ucas" Type="0"/>
-    <ROW Component="libogg_64.dll" ComponentId="{20BEF36B-F657-4B3C-8EA2-2F4242BC15CA}" Directory_="VS2015_Dir" Attributes="256" KeyPath="libogg_64.dll"/>
-    <ROW Component="libvorbis_64.dll" ComponentId="{61A04478-FEC7-46C1-B4E0-44E2AD5B3D0C}" Directory_="VS2015_2_Dir" Attributes="256" KeyPath="libvorbis_64.dll"/>
-    <ROW Component="libvorbisfile_64.dll" ComponentId="{A9DBF86C-655D-4CFC-8A69-BCB85F7F6BA2}" Directory_="VS2015_2_Dir" Attributes="256" KeyPath="libvorbisfile_64.dll"/>
-    <ROW Component="run.bat" ComponentId="{830A3B9C-8B7F-48FE-B510-3DBC17442D73}" Directory_="API_Dir" Attributes="0" KeyPath="run.bat"/>
-    <ROW Component="tbb.dll" ComponentId="{D1DFFD18-8FB5-47BC-A5D2-DBA8E967D874}" Directory_="Win64_5_Dir" Attributes="256" KeyPath="tbb.dll"/>
-    <ROW Component="tbb12.dll" ComponentId="{A0C191D8-A402-414E-8EAB-F0818843B1BD}" Directory_="Win64_5_Dir" Attributes="256" KeyPath="tbb12.dll"/>
-    <ROW Component="xaudio2_9redist.dll" ComponentId="{5792732E-5C9E-43CA-88D1-FBB6D503B5B9}" Directory_="x64_Dir" Attributes="256" KeyPath="xaudio2_9redist.dll"/>
+    <ROW Component="D3D12Core.dll" ComponentId="{9A1594B0-C5A9-46C7-AD99-BC1B9211E5F6}" Directory_="D3D12_Dir" Attributes="256" KeyPath="D3D12Core.dll"/>
+    <ROW Component="GFSDK_Aftermath_Lib.x64.dll" ComponentId="{44AAAE72-7221-41F8-AF20-FD859CF767E8}" Directory_="Win64_Dir" Attributes="256" KeyPath="GFSDK_Aftermath_Lib.x64.dll"/>
+    <ROW Component="ImageGenerator.py" ComponentId="{8FB327EA-568B-4E49-97E8-5D7B85297648}" Directory_="generator_Dir" Attributes="0" KeyPath="ImageGenerator.py" Type="0"/>
+    <ROW Component="MeetAI.exe" ComponentId="{495556B5-E3BB-4F6B-ABA4-8EE23A7C9F5D}" Directory_="Win64_6_Dir" Attributes="256" KeyPath="MeetAI.exe"/>
+    <ROW Component="MeetAI.exe_2" ComponentId="{57174313-323A-4AAC-A6E2-0F46D2CB8B74}" Directory_="Game_Dir" Attributes="256" KeyPath="MeetAI.exe_2"/>
+    <ROW Component="OpenImageDenoise.dll" ComponentId="{4765DFF4-56D4-45C9-9752-26EDDB0329A8}" Directory_="Win64_6_Dir" Attributes="256" KeyPath="OpenImageDenoise.dll"/>
+    <ROW Component="SpeechToText.py" ComponentId="{D99D8112-EDC8-4A25-ACC1-F12A4280D97E}" Directory_="converter_Dir" Attributes="0" KeyPath="SpeechToText.py" Type="0"/>
+    <ROW Component="UEPrereqSetup_x64.exe" ComponentId="{A3AD3AA6-45A6-435D-95AE-7C8C4B0C302C}" Directory_="enus_Dir" Attributes="0" KeyPath="UEPrereqSetup_x64.exe"/>
+    <ROW Component="WinPixEventRuntime.dll" ComponentId="{19D47225-46A7-491B-A982-061C985A5E5C}" Directory_="x64_Dir" Attributes="256" KeyPath="WinPixEventRuntime.dll"/>
+    <ROW Component="blank.png" ComponentId="{505E76AC-E4FB-45F7-8DF2-4907AB5544A9}" Directory_="img_Dir" Attributes="0" KeyPath="blank.png" Type="0"/>
+    <ROW Component="conda.yaml" ComponentId="{5883EB78-F163-4F8B-B482-DC45BEB7FD98}" Directory_="environment_Dir" Attributes="0" KeyPath="conda.yaml" Type="0"/>
+    <ROW Component="d3d12SDKLayers.dll" ComponentId="{0F20B5A9-D73C-439B-B6F3-0535746F5377}" Directory_="D3D12_Dir" Attributes="256" KeyPath="d3d12SDKLayers.dll"/>
+    <ROW Component="dbghelp.dll" ComponentId="{3A6BC949-F199-4DAC-8DF3-B4802E3AC683}" Directory_="DbgHelp_Dir" Attributes="256" KeyPath="dbghelp.dll"/>
+    <ROW Component="global.ucas" ComponentId="{4079D891-7B55-4401-B055-4D936D099754}" Directory_="Paks_Dir" Attributes="0" KeyPath="global.ucas" Type="0"/>
+    <ROW Component="invisible.cur" ComponentId="{F7A13D96-71ED-449F-A7CB-699F711018A6}" Directory_="Cursor_Dir" Attributes="0" KeyPath="invisible.cur" Type="0"/>
+    <ROW Component="libogg_64.dll" ComponentId="{2BE11FE1-B522-40E5-B601-83DB655AAC5C}" Directory_="VS2015_Dir" Attributes="256" KeyPath="libogg_64.dll"/>
+    <ROW Component="libvorbis_64.dll" ComponentId="{EE47692F-0ABC-4D08-827F-6F7A456BF67D}" Directory_="VS2015_2_Dir" Attributes="256" KeyPath="libvorbis_64.dll"/>
+    <ROW Component="libvorbisfile_64.dll" ComponentId="{EB64A06B-CE7B-494E-8912-2E6FFF049324}" Directory_="VS2015_2_Dir" Attributes="256" KeyPath="libvorbisfile_64.dll"/>
+    <ROW Component="long.wav" ComponentId="{39AEB29E-3E31-4742-9428-B51469513E29}" Directory_="wav_Dir" Attributes="0" KeyPath="long.wav" Type="0"/>
+    <ROW Component="main.py" ComponentId="{E778C249-8FA8-44D5-A35B-50A54CD6B47E}" Directory_="Server_Dir" Attributes="0" KeyPath="main.py" Type="0"/>
+    <ROW Component="msquic.dll" ComponentId="{D0826F44-303B-417D-B0C3-8295F4AC3AC3}" Directory_="win64_Dir" Attributes="256" KeyPath="msquic.dll"/>
+    <ROW Component="openxr_loader.dll" ComponentId="{D4175C55-EC97-4952-A961-407BE66F3FE8}" Directory_="win64_2_Dir" Attributes="256" KeyPath="openxr_loader.dll"/>
+    <ROW Component="run.bat" ComponentId="{6D57768A-9F40-410B-A0E5-B7B8EC9B8B8E}" Directory_="environment_Dir" Attributes="0" KeyPath="run.bat"/>
+    <ROW Component="tbb.dll" ComponentId="{13568856-0011-4E63-88FC-74DF8E3F7E96}" Directory_="Win64_6_Dir" Attributes="256" KeyPath="tbb.dll"/>
+    <ROW Component="tbb12.dll" ComponentId="{62641E23-7A7B-41EB-AFDA-547118EE30AC}" Directory_="Win64_6_Dir" Attributes="256" KeyPath="tbb12.dll"/>
+    <ROW Component="tbbmalloc.dll" ComponentId="{CF79CBC7-4FCB-48DA-B78E-715D71BFADA3}" Directory_="Win64_6_Dir" Attributes="256" KeyPath="tbbmalloc.dll"/>
+    <ROW Component="xaudio2_9redist.dll" ComponentId="{E157769C-A56B-463C-8F84-91F024D62B00}" Directory_="x64_2_Dir" Attributes="256" KeyPath="xaudio2_9redist.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
@@ -101,36 +115,51 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
     <ROW File="dbghelp.dll" Component_="dbghelp.dll" FileName="dbghelp.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\DbgHelp\dbghelp.dll" SelfReg="false"/>
-    <ROW File="GfnRuntimeSdk.dll" Component_="GfnRuntimeSdk.dll" FileName="GFNRUN~1.DLL|GfnRuntimeSdk.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\NVIDIA\GeForceNOW\Win64\GfnRuntimeSdk.dll" SelfReg="false"/>
+    <ROW File="msquic.dll" Component_="msquic.dll" FileName="msquic.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\MsQuic\v220\win64\msquic.dll" SelfReg="false"/>
     <ROW File="GFSDK_Aftermath_Lib.x64.dll" Component_="GFSDK_Aftermath_Lib.x64.dll" FileName="GFSDK_~1.DLL|GFSDK_Aftermath_Lib.x64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\NVIDIA\NVaftermath\Win64\GFSDK_Aftermath_Lib.x64.dll" SelfReg="false"/>
     <ROW File="libogg_64.dll" Component_="libogg_64.dll" FileName="LIBOGG~1.DLL|libogg_64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\Ogg\Win64\VS2015\libogg_64.dll" SelfReg="false"/>
-    <ROW File="PhysX3Common_x64.dll" Component_="PhysX3Common_x64.dll" FileName="PHYSX3~1.DLL|PhysX3Common_x64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\PhysX3\Win64\VS2015\PhysX3Common_x64.dll" SelfReg="false"/>
-    <ROW File="PhysX3Cooking_x64.dll" Component_="PhysX3Cooking_x64.dll" FileName="PHYSX3~2.DLL|PhysX3Cooking_x64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\PhysX3\Win64\VS2015\PhysX3Cooking_x64.dll" SelfReg="false"/>
-    <ROW File="PhysX3_x64.dll" Component_="PhysX3_x64.dll" FileName="PHYSX3~3.DLL|PhysX3_x64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\PhysX3\Win64\VS2015\PhysX3_x64.dll" SelfReg="false"/>
-    <ROW File="PxFoundation_x64.dll" Component_="PxFoundation_x64.dll" FileName="PXFOUN~1.DLL|PxFoundation_x64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\PhysX3\Win64\VS2015\PxFoundation_x64.dll" SelfReg="false"/>
-    <ROW File="PxPvdSDK_x64.dll" Component_="PxPvdSDK_x64.dll" FileName="PXPVDS~1.DLL|PxPvdSDK_x64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\PhysX3\Win64\VS2015\PxPvdSDK_x64.dll" SelfReg="false"/>
+    <ROW File="openxr_loader.dll" Component_="openxr_loader.dll" FileName="OPENXR~1.DLL|openxr_loader.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\OpenXR\win64\openxr_loader.dll" SelfReg="false"/>
     <ROW File="libvorbisfile_64.dll" Component_="libvorbisfile_64.dll" FileName="LIBVOR~1.DLL|libvorbisfile_64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\Vorbis\Win64\VS2015\libvorbisfile_64.dll" SelfReg="false"/>
     <ROW File="libvorbis_64.dll" Component_="libvorbis_64.dll" FileName="LIBVOR~2.DLL|libvorbis_64.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\Vorbis\Win64\VS2015\libvorbis_64.dll" SelfReg="false"/>
+    <ROW File="WinPixEventRuntime.dll" Component_="WinPixEventRuntime.dll" FileName="WINPIX~1.DLL|WinPixEventRuntime.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\Windows\WinPixEventRuntime\x64\WinPixEventRuntime.dll" SelfReg="false"/>
     <ROW File="xaudio2_9redist.dll" Component_="xaudio2_9redist.dll" FileName="XAUDIO~1.DLL|xaudio2_9redist.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Binaries\ThirdParty\Windows\XAudio2_9\x64\xaudio2_9redist.dll" SelfReg="false"/>
-    <ROW File="UEPrereqSetup_x64.exe" Component_="UEPrereqSetup_x64.exe" FileName="UEPRER~1.EXE|UEPrereqSetup_x64.exe" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Extras\Redist\en-us\UEPrereqSetup_x64.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="invisible.cur" Component_="invisible.cur" FileName="INVISI~1.CUR|invisible.cur" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Content\Slate\Cursor\invisible.cur" SelfReg="false"/>
+    <ROW File="UEPrereqSetup_x64.exe" Component_="UEPrereqSetup_x64.exe" FileName="UEPRER~1.EXE|UEPrereqSetup_x64.exe" Attributes="0" SourcePath="..\..\..\MeetAI\Game\Engine\Extras\Redist\en-us\UEPrereqSetup_x64.exe" SelfReg="false"/>
     <ROW File="D3D12Core.dll" Component_="D3D12Core.dll" FileName="D3D12C~1.DLL|D3D12Core.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\D3D12\D3D12Core.dll" SelfReg="false"/>
-    <ROW File="MeetAIWin64Shipping.exe" Component_="MeetAIWin64Shipping.exe" FileName="MEETAI~1.EXE|MeetAI-Win64-Shipping.exe" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\MeetAI-Win64-Shipping.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="d3d12SDKLayers.dll" Component_="d3d12SDKLayers.dll" FileName="D3D12S~1.DLL|d3d12SDKLayers.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\D3D12\d3d12SDKLayers.dll" SelfReg="false"/>
+    <ROW File="MeetAI.exe" Component_="MeetAI.exe" FileName="MeetAI.exe" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\MeetAI.exe" SelfReg="false" DigSign="true"/>
     <ROW File="OpenImageDenoise.dll" Component_="OpenImageDenoise.dll" FileName="OPENIM~1.DLL|OpenImageDenoise.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\OpenImageDenoise.dll" SelfReg="false"/>
     <ROW File="tbb.dll" Component_="tbb.dll" FileName="tbb.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\tbb.dll" SelfReg="false"/>
     <ROW File="tbb12.dll" Component_="tbb12.dll" FileName="tbb12.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\tbb12.dll" SelfReg="false"/>
+    <ROW File="tbbmalloc.dll" Component_="tbbmalloc.dll" FileName="TBBMAL~1.DLL|tbbmalloc.dll" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Binaries\Win64\tbbmalloc.dll" SelfReg="false"/>
     <ROW File="global.ucas" Component_="global.ucas" FileName="GLOBAL~1.UCA|global.ucas" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Content\Paks\global.ucas" SelfReg="false"/>
     <ROW File="global.utoc" Component_="global.ucas" FileName="GLOBAL~1.UTO|global.utoc" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Content\Paks\global.utoc" SelfReg="false"/>
     <ROW File="MeetAIWindows.pak" Component_="global.ucas" FileName="MEETAI~1.PAK|MeetAI-Windows.pak" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Content\Paks\MeetAI-Windows.pak" SelfReg="false"/>
     <ROW File="MeetAIWindows.ucas" Component_="global.ucas" FileName="MEETAI~1.UCA|MeetAI-Windows.ucas" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Content\Paks\MeetAI-Windows.ucas" SelfReg="false"/>
     <ROW File="MeetAIWindows.utoc" Component_="global.ucas" FileName="MEETAI~1.UTO|MeetAI-Windows.utoc" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI\Content\Paks\MeetAI-Windows.utoc" SelfReg="false"/>
-    <ROW File="MeetAI.exe" Component_="MeetAI.exe" FileName="MeetAI.exe" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI.exe" SelfReg="false" DigSign="true"/>
-    <ROW File="conda.yaml" Component_="conda.yaml" FileName="CONDA~1.YAM|conda.yaml" Attributes="0" SourcePath="..\..\..\MeetAI\API\conda.yaml" SelfReg="false"/>
-    <ROW File="main.py" Component_="conda.yaml" FileName="main.py" Attributes="0" SourcePath="..\..\..\MeetAI\API\main.py" SelfReg="false"/>
-    <ROW File="run.bat" Component_="run.bat" FileName="run.bat" Attributes="0" SourcePath="..\..\..\MeetAI\API\run.bat" SelfReg="false"/>
-    <ROW File="utilities.py" Component_="conda.yaml" FileName="UTILIT~1.PY|utilities.py" Attributes="0" SourcePath="..\..\..\MeetAI\API\utilities.py" SelfReg="false"/>
+    <ROW File="MeetAI.exe_2" Component_="MeetAI.exe_2" FileName="MeetAI.exe" Attributes="0" SourcePath="..\..\..\MeetAI\Game\MeetAI.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="blank.png" Component_="blank.png" FileName="blank.png" Attributes="0" SourcePath="..\..\..\MeetAI\Server\content\img\blank.png" SelfReg="false"/>
+    <ROW File="large.png" Component_="blank.png" FileName="large.png" Attributes="0" SourcePath="..\..\..\MeetAI\Server\content\img\large.png" SelfReg="false"/>
+    <ROW File="long.wav" Component_="long.wav" FileName="long.wav" Attributes="0" SourcePath="..\..\..\MeetAI\Server\content\wav\long.wav" SelfReg="false"/>
+    <ROW File="medium.wav" Component_="long.wav" FileName="medium.wav" Attributes="0" SourcePath="..\..\..\MeetAI\Server\content\wav\medium.wav" SelfReg="false"/>
+    <ROW File="short.wav" Component_="long.wav" FileName="short.wav" Attributes="0" SourcePath="..\..\..\MeetAI\Server\content\wav\short.wav" SelfReg="false"/>
+    <ROW File="SpeechToText.py" Component_="SpeechToText.py" FileName="SPEECH~1.PY|SpeechToText.py" Attributes="0" SourcePath="..\..\..\MeetAI\Server\converter\SpeechToText.py" SelfReg="false"/>
+    <ROW File="TextToSpeech.py" Component_="SpeechToText.py" FileName="TEXTTO~1.PY|TextToSpeech.py" Attributes="0" SourcePath="..\..\..\MeetAI\Server\converter\TextToSpeech.py" SelfReg="false"/>
+    <ROW File="conda.yaml" Component_="conda.yaml" FileName="CONDA~1.YAM|conda.yaml" Attributes="0" SourcePath="..\..\..\MeetAI\Server\environment\conda.yaml" SelfReg="false"/>
+    <ROW File="config.env" Component_="conda.yaml" FileName="config.env" Attributes="0" SourcePath="..\..\..\MeetAI\Server\environment\config.env" SelfReg="false"/>
+    <ROW File="run.bat" Component_="run.bat" FileName="run.bat" Attributes="0" SourcePath="..\..\..\MeetAI\Server\environment\run.bat" SelfReg="false"/>
+    <ROW File="ImageGenerator.py" Component_="ImageGenerator.py" FileName="IMAGEG~1.PY|ImageGenerator.py" Attributes="0" SourcePath="..\..\..\MeetAI\Server\generator\ImageGenerator.py" SelfReg="false"/>
+    <ROW File="TextGenerator.py" Component_="ImageGenerator.py" FileName="TEXTGE~1.PY|TextGenerator.py" Attributes="0" SourcePath="..\..\..\MeetAI\Server\generator\TextGenerator.py" SelfReg="false"/>
+    <ROW File="main.py" Component_="main.py" FileName="main.py" Attributes="0" SourcePath="..\..\..\MeetAI\Server\main.py" SelfReg="false"/>
+    <ROW File="tests.py" Component_="main.py" FileName="tests.py" Attributes="0" SourcePath="..\..\..\MeetAI\Server\tests.py" SelfReg="false"/>
+    <ROW File="utilities.py" Component_="main.py" FileName="UTILIT~1.PY|utilities.py" Attributes="0" SourcePath="..\..\..\MeetAI\Server\utilities.py" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BootstrapperUISequenceComponent">
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="249"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="251"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="..\..\.." PackageFileName="MeetAI - Installer" Languages="en" InstallationType="4" UseLargeSchema="true"/>
@@ -154,8 +183,14 @@
     <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
     <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
   </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiActionTextComponent">
+    <ROW Action="AI_DeleteLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_DeleteRLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_ExtractLzma" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+    <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
     <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
@@ -185,12 +220,21 @@
     <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH_ORIGINAL" Target="[AI_SETUPEXEPATH]"/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DeleteCadLzma" Type="51" Source="AI_DeleteLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteLzma" Type="1025" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
+    <ROW Action="AI_DeleteRCadLzma" Type="51" Source="AI_DeleteRLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteRLzma" Type="1281" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
     <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
     <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_ExtractCadLzma" Type="51" Source="AI_ExtractLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_ExtractLzma" Type="1025" Source="lzmaextractor.dll" Target="ExtractLZMAFiles"/>
+    <ROW Action="AI_FindExeLzma" Type="1" Source="lzmaextractor.dll" Target="FindEXE"/>
     <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_PRESERVE_INSTALL_TYPE" Type="65" Source="aicustact.dll" Target="PreserveInstallType"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
     <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
@@ -201,29 +245,33 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
     <ROW Feature_="MainFeature" Component_="APPDIR"/>
-    <ROW Feature_="MainFeature" Component_="ProductInformation"/>
     <ROW Feature_="MainFeature" Component_="dbghelp.dll"/>
-    <ROW Feature_="MainFeature" Component_="GfnRuntimeSdk.dll"/>
+    <ROW Feature_="MainFeature" Component_="msquic.dll"/>
     <ROW Feature_="MainFeature" Component_="GFSDK_Aftermath_Lib.x64.dll"/>
     <ROW Feature_="MainFeature" Component_="libogg_64.dll"/>
-    <ROW Feature_="MainFeature" Component_="PhysX3Common_x64.dll"/>
-    <ROW Feature_="MainFeature" Component_="PhysX3Cooking_x64.dll"/>
-    <ROW Feature_="MainFeature" Component_="PhysX3_x64.dll"/>
-    <ROW Feature_="MainFeature" Component_="PxFoundation_x64.dll"/>
-    <ROW Feature_="MainFeature" Component_="PxPvdSDK_x64.dll"/>
+    <ROW Feature_="MainFeature" Component_="openxr_loader.dll"/>
     <ROW Feature_="MainFeature" Component_="libvorbisfile_64.dll"/>
     <ROW Feature_="MainFeature" Component_="libvorbis_64.dll"/>
+    <ROW Feature_="MainFeature" Component_="WinPixEventRuntime.dll"/>
     <ROW Feature_="MainFeature" Component_="xaudio2_9redist.dll"/>
+    <ROW Feature_="MainFeature" Component_="invisible.cur"/>
     <ROW Feature_="MainFeature" Component_="UEPrereqSetup_x64.exe"/>
     <ROW Feature_="MainFeature" Component_="D3D12Core.dll"/>
-    <ROW Feature_="MainFeature" Component_="MeetAIWin64Shipping.exe"/>
+    <ROW Feature_="MainFeature" Component_="d3d12SDKLayers.dll"/>
+    <ROW Feature_="MainFeature" Component_="MeetAI.exe"/>
     <ROW Feature_="MainFeature" Component_="OpenImageDenoise.dll"/>
     <ROW Feature_="MainFeature" Component_="tbb.dll"/>
     <ROW Feature_="MainFeature" Component_="tbb12.dll"/>
+    <ROW Feature_="MainFeature" Component_="tbbmalloc.dll"/>
     <ROW Feature_="MainFeature" Component_="global.ucas"/>
-    <ROW Feature_="MainFeature" Component_="MeetAI.exe"/>
-    <ROW Feature_="MainFeature" Component_="run.bat"/>
+    <ROW Feature_="MainFeature" Component_="MeetAI.exe_2"/>
+    <ROW Feature_="MainFeature" Component_="blank.png"/>
+    <ROW Feature_="MainFeature" Component_="long.wav"/>
+    <ROW Feature_="MainFeature" Component_="SpeechToText.py"/>
     <ROW Feature_="MainFeature" Component_="conda.yaml"/>
+    <ROW Feature_="MainFeature" Component_="ImageGenerator.py"/>
+    <ROW Feature_="MainFeature" Component_="main.py"/>
+    <ROW Feature_="MainFeature" Component_="run.bat"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="MeetAI_1.exe" SourcePath="..\Game\MeetAI.ico" Index="0"/>
@@ -235,6 +283,15 @@
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
     <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99" Builds="DefaultBuild"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="101" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="199" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="198" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="197" Builds="DefaultBuild"/>
+    <ROW Action="AI_FindExeLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="196" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1549" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1548" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="6599" Builds="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
@@ -242,25 +299,22 @@
     <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
     <ROW Action="AI_DpiContentScale" Sequence="52"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
-    <ROW Condition="( Version9X OR ( NOT VersionNT64 ) OR ( VersionNT64 AND ((VersionNT64 &lt;&gt; 600) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 600) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 601) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 601) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 602) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 602) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 603) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 603) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 1000) OR (MsiNTProductType = 1)) ) )" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNT64Display]." DescriptionLocId="AI.LaunchCondition.NoSpecificNT64" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="( Version9X OR ( NOT VersionNT64 ) OR ( VersionNT64 AND ((VersionNT64 &lt;&gt; 601) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 601) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 602) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 602) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 603) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 603) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 1000) OR (MsiNTProductType = 1)) ) )" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNT64Display]." DescriptionLocId="AI.LaunchCondition.NoSpecificNT64" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="( Version9X OR VersionNT64 )" Description="[ProductName] cannot be installed on [WindowsTypeNTDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 600)" Description="[ProductName] cannot be installed on [WindowsTypeNT60Display]." DescriptionLocId="AI.LaunchCondition.NoNT60" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
-    <ROW Registry="Manufacturer" Root="-1" Key="Software\[Manufacturer]" Name="\"/>
-    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
-    <ROW Registry="ProductName" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="\"/>
-    <ROW Registry="Software" Root="-1" Key="Software" Name="\"/>
-    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="MeetAI" Directory_="DesktopFolder" Name="MEETAI~1|MeetAI - Game" Component_="MeetAI.exe" Target="[#MeetAI.exe]" Hotkey="0" Icon_="MeetAI_1.exe" IconIndex="0" ShowCmd="1" WkDir="Game_Dir"/>
-    <ROW Shortcut="run" Directory_="DesktopFolder" Name="MEETAI~1|MeetAI - Server" Component_="run.bat" Target="[#run.bat]" Hotkey="0" Icon_="MeetAI_1.exe" IconIndex="0" ShowCmd="1" WkDir="API_Dir"/>
+    <ROW Shortcut="MeetAI" Directory_="DesktopFolder" Name="MEETAI~1|MeetAI - Game" Component_="MeetAI.exe_2" Target="[#MeetAI.exe_2]" Hotkey="0" Icon_="MeetAI_1.exe" IconIndex="0" ShowCmd="1" WkDir="Game_Dir"/>
+    <ROW Shortcut="MeetAIGame1" Directory_="DesktopFolder" Name="MEETAI~3|MeetAI - VR" Component_="MeetAI.exe_2" Target="[#MeetAI.exe_2]" Arguments="-vr" Hotkey="0" Icon_="MeetAI_1.exe" IconIndex="0" ShowCmd="1" WkDir="Game_Dir"/>
+    <ROW Shortcut="run_1" Directory_="DesktopFolder" Name="MEETAI~2|MeetAI - Server" Component_="run.bat" Target="[#run.bat]" Hotkey="0" Icon_="MeetAI_1.exe" IconIndex="0" ShowCmd="1" WkDir="environment_Dir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
