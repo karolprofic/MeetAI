@@ -7,6 +7,9 @@ List of supported and tested AI models and TTS/SST options available in the game
   - microsoft/DialoGPT-large
   - microsoft/DialoGPT-medium
   - microsoft/DialoGPT-small
+  - facebook/blenderbot-3B
+  - facebook/blenderbot-1B-distill
+  - facebook/blenderbot-400M-distill
 - Paid
   - gpt-3.5-turbo
   - gpt-4
@@ -15,6 +18,8 @@ List of supported and tested AI models and TTS/SST options available in the game
 - Free
   - CompVis/stable-diffusion-v1-4
   - runwayml/stable-diffusion-v1-5
+  - stabilityai/stable-diffusion-xl-base-1.0
+  - stabilityai/stable-diffusion-xl-refiner-1.0
 - Paid
   - dall-e-2
   - dall-e-3

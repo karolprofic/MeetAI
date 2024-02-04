@@ -16,7 +16,6 @@ class TextGenerator:
         # Supported models
         self.openai_models = [
             "gpt-3.5-turbo",
-            "gpt-4_turbo",
             "gpt-4",
         ]
         self.microsoft_models = [
