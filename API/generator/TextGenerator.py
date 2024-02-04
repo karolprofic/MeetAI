@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import torch
 
 
@@ -11,6 +11,7 @@ class TextGenerator:
             "content": "You are a AI companion in video game. "
                        "Answer player questions in a friendly way. "
                        "Avoid answers in which you say you are AI. "
+                       "Try to keep your answers short"
         }]
         # Supported models
         self.openai_models = [
@@ -23,7 +24,11 @@ class TextGenerator:
             "microsoft/dialogpt-medium",
             "microsoft/dialogpt-small",
         ]
-
+        self.blenderbot_models = [
+            "facebook/blenderbot-400m-distill",
+            "facebook/blenderbot-1b-distill",
+            "facebook/blenderbot-3b",
+        ]
         # DialoGPT
         self.dialo_ai_tokenizer = None
         self.dialo_ai_model = None
@@ -32,6 +37,9 @@ class TextGenerator:
         self.dialo_ai_chat_history = None
         self.dialo_ai_started = False
         self.dialo_ai_step = 0
+        # Blenderbot
+        self.blenderbot_model = None
+        self.blenderbot_chat = None
 
     def generate(self, model, query):
         model = model.lower().replace(" ", "_")
@@ -41,6 +49,9 @@ class TextGenerator:
 
         if model in self.microsoft_models:
             return self.microsoft_dialo(model, query)
+
+        if model in self.blenderbot_models:
+            return self.facebook_blenderbot(model, query)
 
         if model in self.openai_models:
             return self.openai_gpt(model, query)
@@ -100,6 +111,17 @@ class TextGenerator:
         self.openai_messages.append({"role": "assistant", "content": response_content})
 
         return {'status': 'Text generated successfully', 'text': response_content}
+
+    def facebook_blenderbot(self, model, query):
+        if self.blenderbot_model != model:
+            self.blenderbot_model = model
+            self.blenderbot_chat = pipeline("text2text-generation", model=model)
+        try:
+            response = self.blenderbot_chat(query)
+            return {'status': 'Text generated successfully', 'text': response[0]['generated_text']}
+        except Exception as e:
+            print(f"OpenAI API returned an error: {e}")
+            return {'status': 'Unable to generate text'}
 
     @staticmethod
     def sanitize(string):
