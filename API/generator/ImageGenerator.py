@@ -38,7 +38,7 @@ class ImageGenerator:
             return self.stable_diffusion_xl_base(model, description)
 
         if model in self.stable_diffusion_models_xl_refiner:
-            return self.stable_diffusion_xl_refined(model, description)
+            return self.stable_diffusion_xl_refined(description)
 
         if model in self.openai_models:
             return self.openai_dall_e(model, description)
@@ -81,20 +81,20 @@ class ImageGenerator:
             print(f"Stable Diffusion returned an error: {e}")
             return {'status': 'Unable to generated image'}
 
-    def stable_diffusion_xl_refined(self, model, description):
+    def stable_diffusion_xl_refined(self, description):
         try:
             filename = datetime.now().strftime("image_%d-%m-%Y_%H-%M-%S.png")
             filepath = os.path.join(self.path, filename)
 
             base = DiffusionPipeline.from_pretrained(
-                model,
+                "stabilityai/stable-diffusion-xl-base-1.0",
                 torch_dtype=torch.float16,
                 variant="fp16",
                 use_safetensors=True
             )
             base.to("cuda")
             refiner = DiffusionPipeline.from_pretrained(
-                model,
+                "stabilityai/stable-diffusion-xl-refiner-1.0",
                 text_encoder_2=base.text_encoder_2,
                 vae=base.vae,
                 torch_dtype=torch.float16,
